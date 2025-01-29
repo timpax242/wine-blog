@@ -59,8 +59,56 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: theme("colors.gray.900"),
+            maxWidth: "none",
+            a: {
+              color: theme("colors.burgundy.700"),
+              "&:hover": {
+                color: theme("colors.burgundy.800"),
+              },
+            },
+            h2: {
+              color: theme("colors.gray.800"),
+              fontWeight: "700",
+              fontSize: "1.5em",
+              marginTop: "1.5em",
+              marginBottom: "0.5em",
+            },
+            h3: {
+              color: theme("colors.gray.800"),
+              fontWeight: "600",
+              fontSize: "1.25em",
+              marginTop: "1.5em",
+              marginBottom: "0.5em",
+            },
+            strong: {
+              color: theme("colors.gray.800"),
+            },
+            blockquote: {
+              color: theme("colors.gray.700"),
+              borderLeftColor: theme("colors.burgundy.700"),
+              fontStyle: "italic",
+            },
+            "ul > li::before": {
+              backgroundColor: theme("colors.burgundy.700"),
+            },
+            "ol > li::before": {
+              color: theme("colors.burgundy.700"),
+            },
+          },
+        },
+        lg: {
+          css: {
+            fontSize: "1.125rem",
+            lineHeight: "1.75",
+          },
+        },
+      }),
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 }
 

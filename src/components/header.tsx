@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { Wine, Menu, X } from 'lucide-react';
+import Link from 'next/link';
 
-export function Header() {
+export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -13,7 +14,7 @@ export function Header() {
   return (
     <header className="bg-burgundy-900 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="flex items-center space-x-3">
+        <Link href="/" className="flex items-center space-x-3">
           <div className="relative">
             <Wine size={32} className="text-burgundy-200" />
             <div className="absolute -top-1 -right-1 w-3 h-3 bg-burgundy-200 rounded-full animate-pulse"></div>
@@ -21,28 +22,40 @@ export function Header() {
           <span className="text-3xl font-cursive tracking-wide">
             Korkkikierre
           </span>
-        </div>
+        </Link>
         <nav className="hidden md:block">
           <ul className="flex space-x-4">
             <li>
-              <a href="#" className="hover:text-burgundy-200 transition-colors">
+              <Link
+                href="/"
+                className="hover:text-burgundy-200 transition-colors"
+              >
                 Etusivu
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-burgundy-200 transition-colors">
+              <Link
+                href="/reviews"
+                className="hover:text-burgundy-200 transition-colors"
+              >
                 Arvostelut
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-burgundy-200 transition-colors">
+              <Link
+                href="/regions"
+                className="hover:text-burgundy-200 transition-colors"
+              >
                 Alueet
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-burgundy-200 transition-colors">
+              <Link
+                href="/about"
+                className="hover:text-burgundy-200 transition-colors"
+              >
                 Tietoa
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
@@ -59,36 +72,36 @@ export function Header() {
         <nav className="md:hidden mt-4">
           <ul className="flex flex-col space-y-2">
             <li>
-              <a
-                href="#"
+              <Link
+                href="/"
                 className="block hover:text-burgundy-200 transition-colors"
               >
                 Etusivu
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                href="/reviews"
                 className="block hover:text-burgundy-200 transition-colors"
               >
                 Arvostelut
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                href="/regions"
                 className="block hover:text-burgundy-200 transition-colors"
               >
                 Alueet
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                href="/about"
                 className="block hover:text-burgundy-200 transition-colors"
               >
                 Tietoa
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

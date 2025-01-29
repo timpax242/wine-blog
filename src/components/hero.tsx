@@ -1,7 +1,6 @@
-import React from "react"
-import Image from "next/image"
+import Image from 'next/image';
 
-export function Hero() {
+export default function Hero() {
   return (
     <section className="relative h-[70vh] w-full mb-12">
       <Image
@@ -13,10 +12,12 @@ export function Hero() {
       />
       <div className="absolute inset-0 bg-black/40" />
       <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-white text-center">
-        <h2 className="text-3xl font-bold mb-4 max-w-3xl">Napa Valleyn piilotettuja helmiä etsimässä</h2>
+        <h2 className="text-3xl font-bold mb-4 max-w-3xl">
+          Napa Valleyn piilotettuja helmiä etsimässä
+        </h2>
         <p className="text-lg mb-6 max-w-2xl">
-          Tutustu vähemmän tunnettuihin viinitiloihin, jotka tuottavat joitakin Kalifornian kuuluisimman viinialueen
-          hienoimmista viineistä.
+          Tutustu vähemmän tunnettuihin viinitiloihin, jotka tuottavat joitakin
+          Kalifornian kuuluisimman viinialueen hienoimmista viineistä.
         </p>
         <a
           href="#"
@@ -26,6 +27,5 @@ export function Hero() {
         </a>
       </div>
     </section>
-  )
+  );
 }
-
