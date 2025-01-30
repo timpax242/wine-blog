@@ -1,12 +1,6 @@
 import Image from 'next/image';
-
-const categories = [
-  'Punaviinit',
-  'Valkoviinit',
-  'Kuohuviinit',
-  'Viinialueet',
-  'Viininmaistelu',
-];
+import Link from 'next/link';
+import { contentfulQueries } from '@/lib/contentful/queries';
 
 const popularPosts = [
   {
@@ -23,17 +17,26 @@ const popularPosts = [
   },
 ];
 
-export default function Sidebar() {
+export default async function Sidebar() {
+  const categories = await contentfulQueries.getCategories();
+
   return (
     <aside className="lg:w-1/4">
       <div className="bg-white p-6 mb-8 rounded shadow-sm">
         <h3 className="text-lg font-semibold mb-4">Kategoriat</h3>
-        <ul className="space-y-2">
-          {categories.map((category, index) => (
-            <li key={index}>
-              <a href="#" className="text-burgundy-700 hover:text-burgundy-900">
-                {category}
-              </a>
+        <ul className="space-y-4">
+          {categories.map((category) => (
+            <li key={category.id}>
+              <Link href={`/category/${category.slug}`} className="block">
+                <span className="text-burgundy-700 hover:text-burgundy-900 font-medium">
+                  {category.name}
+                </span>
+                {category.description && (
+                  <p className="text-sm text-gray-600 mt-1">
+                    {category.description}
+                  </p>
+                )}
+              </Link>
             </li>
           ))}
         </ul>

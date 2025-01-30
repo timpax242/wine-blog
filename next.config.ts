@@ -9,6 +9,11 @@ module.exports = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'images.ctfassets.net',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'images.pexels.com',
         port: '',
         pathname: '/photos/**',
