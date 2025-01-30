@@ -1,25 +1,26 @@
 import { contentfulClient } from './client';
-import type { BlogPost, BlogPostResponse, Category } from './types';
+import type { BlogPost, BlogPostResponse, Category, Footer } from './types';
 
-// Helper function to ensure absolute URLs
+// Helper function to ensure image URLs are absolute
 function ensureAbsoluteUrl(url: string | undefined): string {
-  if (!url) return '/placeholder.svg';
-  if (url.startsWith('//')) return `https:${url}`;
+  if (!url) return '/placeholder.svg'; // Fallback for missing images
+  if (url.startsWith('//')) return `https:${url}`; // Fix protocol-relative URLs
   return url;
 }
 
 export const contentfulQueries = {
   // Get all blog posts with pagination
   getAllPosts: async (page = 1, limit = 10) => {
-    const skip = (page - 1) * limit;
+    const skip = (page - 1) * limit; // Calculate offset for pagination
 
     const response = await contentfulClient.getEntries<BlogPost>({
       content_type: 'post',
-      limit,
-      skip,
-      order: ['-fields.date'],
+      limit, // How many posts to fetch
+      skip, // How many posts to skip
+      order: ['-sys.createdAt'], // Use system timestamp instead of custom date field
     });
 
+    // Transform Contentful response into our app's format
     return {
       posts: response.items.map((item) => ({
         id: item.sys.id,
@@ -31,17 +32,18 @@ export const contentfulQueries = {
         date: item.fields.date,
         author: item.fields.author?.fields?.name,
       })),
-      total: response.total,
-      currentPage: page,
-      totalPages: Math.ceil(response.total / limit),
+      total: response.total, // Total number of posts
+      currentPage: page, // Current page number
+      totalPages: Math.ceil(response.total / limit), // Calculate total pages
     };
   },
 
-  // Get single post by ID
+  // Get a single post by its ID
   getPostById: async (id: string) => {
     try {
       const post = await contentfulClient.getEntry<BlogPost>(id);
 
+      // Transform single post into our app's format
       return {
         id: post.sys.id,
         title: post.fields.title,
@@ -53,15 +55,53 @@ export const contentfulQueries = {
         author: post.fields.author?.fields?.name,
       };
     } catch (error) {
-      return null;
+      return null; // Return null if post not found
     }
   },
 
-  // Search posts
-  searchPosts: async (query: string) => {
+  // Get all categories
+  getCategories: async () => {
+    const response = await contentfulClient.getEntries<Category>({
+      content_type: 'category',
+      order: ['fields.name'], // Sort alphabetically by name
+      select: [
+        // Only fetch these fields
+        'fields.name',
+        'fields.slug',
+        'fields.description',
+        'sys.id',
+      ],
+    });
+
+    // Transform categories into our app's format
+    return response.items.map((item) => ({
+      id: item.sys.id,
+      name: item.fields.name,
+      slug: item.fields.slug,
+      description: item.fields.description || '',
+    }));
+  },
+
+  getPostsByCategory: async (categorySlug: string) => {
+    // First get the category to get its ID
+    const categoryResponse = await contentfulClient.getEntries<Category>({
+      content_type: 'category',
+      'fields.slug': categorySlug,
+      limit: 1,
+    });
+
+    if (!categoryResponse.items.length) {
+      return [];
+    }
+
+    const categoryId = categoryResponse.items[0].sys.id;
+
+    // Then get all posts that reference this category
     const response = await contentfulClient.getEntries<BlogPost>({
       content_type: 'post',
-      query,
+      'fields.category.sys.id': categoryId, // Changed from [in] operator to direct reference
+      order: ['-fields.date'],
+      include: 2,
     });
 
     return response.items.map((item) => ({
@@ -76,18 +116,25 @@ export const contentfulQueries = {
     }));
   },
 
-  getCategories: async () => {
-    const response = await contentfulClient.getEntries<Category>({
-      content_type: 'category',
-      order: ['fields.name'],
-      select: ['fields.name', 'fields.slug', 'fields.description', 'sys.id'],
+  getFooter: async (): Promise<FooterResponse> => {
+    const response = await contentfulClient.getEntries<Footer>({
+      content_type: 'footer',
+      limit: 1,
     });
 
-    return response.items.map((item) => ({
-      id: item.sys.id,
-      name: item.fields.name,
-      slug: item.fields.slug,
-      description: item.fields.description || '',
-    }));
+    if (!response.items.length) {
+      return {
+        title: 'Korkkikierre',
+        content: 'Tutkimme viinin maailmaa, yksi siemaus kerrallaan.',
+        copyright: '© 2024 Korkkikierre. Kaikki oikeudet pidätetään.',
+      };
+    }
+
+    const footer = response.items[0].fields;
+    return {
+      title: footer.footerTitle,
+      content: footer.footerContent,
+      copyright: footer.footerCopyright,
+    };
   },
 };

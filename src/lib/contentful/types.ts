@@ -1,8 +1,12 @@
+import { Document } from '@contentful/rich-text-types';
+import type { Entry } from 'contentful';
+
 export interface BlogPost {
+  contentTypeId: 'post';
   fields: {
     title: string;
     slug: string;
-    content: any; // Rich text content
+    content: Document;
     excerpt: string;
     coverImage?: {
       fields: {
@@ -16,6 +20,16 @@ export interface BlogPost {
       fields: {
         name?: string;
         // Add other author fields if needed
+      };
+    };
+    category?: {
+      fields: {
+        name: string;
+        slug: string;
+        description?: string;
+      };
+      sys: {
+        id: string;
       };
     };
   };
@@ -33,12 +47,21 @@ export interface BlogPostResponse {
 }
 
 export interface Category {
+  contentTypeId: 'category';
   fields: {
     name: string;
     slug: string;
-    description?: string; // Optional description field
+    description?: string;
   };
   sys: {
     id: string;
+  };
+}
+
+export interface Footer {
+  fields: {
+    footerTitle: string;
+    footerContent: Document;
+    footerCopyright: string;
   };
 }
