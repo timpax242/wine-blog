@@ -1,8 +1,17 @@
 import { Document } from '@contentful/rich-text-types';
-import type { Entry } from 'contentful';
+import type { Entry, EntryFields } from 'contentful';
+
+export interface Author {
+  contentTypeId: 'author';
+  fields: {
+    name: EntryFields.Text;
+  };
+  sys: {
+    id: string;
+  };
+}
 
 export interface BlogPost {
-  contentTypeId: 'post';
   fields: {
     title: string;
     slug: string;
@@ -18,8 +27,7 @@ export interface BlogPost {
     date: string;
     author?: {
       fields: {
-        name?: string;
-        // Add other author fields if needed
+        name: string;
       };
     };
     category?: {
@@ -33,10 +41,6 @@ export interface BlogPost {
       };
     };
   };
-  sys: {
-    id: string;
-    createdAt: string;
-  };
 }
 
 export interface BlogPostResponse {
@@ -47,14 +51,10 @@ export interface BlogPostResponse {
 }
 
 export interface Category {
-  contentTypeId: 'category';
   fields: {
     name: string;
     slug: string;
     description?: string;
-  };
-  sys: {
-    id: string;
   };
 }
 
