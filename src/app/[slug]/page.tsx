@@ -1,6 +1,7 @@
 import BlogPost from '@/components/blog-post';
 import { contentfulQueries } from '@/lib/contentful/queries';
 
+// Dynamic route handler for individual blog posts
 export default async function BlogPostPage({
   params,
 }: {
@@ -9,6 +10,7 @@ export default async function BlogPostPage({
   const { slug } = await params;
   const post = await contentfulQueries.getPostBySlug(slug);
 
+  // Handle 404 case
   if (!post) {
     return <div>Artikkelia ei löytynyt</div>;
   }
@@ -16,10 +18,10 @@ export default async function BlogPostPage({
   return <BlogPost {...post} />;
 }
 
-// Optional: Add static generation with revalidation
-export const revalidate = 3600; // Revalidate every hour
+// Revalidate content every hour to ensure fresh content while maintaining performance
+export const revalidate = 3600;
 
-// Generate static params for all blog posts
+// Pre-render all known blog posts at build time for better performance
 export async function generateStaticParams() {
   const posts = await contentfulQueries.getAllPosts();
   return posts.posts.map((post) => ({

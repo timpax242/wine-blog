@@ -2,13 +2,14 @@ import { contentfulClient } from './client';
 import { Document } from '@contentful/rich-text-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
-// Helper function to ensure image URLs are absolute
+// Helper function to ensure image URLs are absolute and provide a fallback
 function ensureAbsoluteUrl(url: string | undefined): string {
   if (!url) return '/placeholder.svg';
   return url.startsWith('//') ? `https:${url}` : url;
 }
 
 export const contentfulQueries = {
+  // Fetch paginated blog posts with optional limit
   getAllPosts: async (page = 1, limit = 10) => {
     const skip = (page - 1) * limit;
     const response = await contentfulClient.getEntries({
@@ -35,8 +36,10 @@ export const contentfulQueries = {
     };
   },
 
+  // Fetch a single blog post by its slug with full content and author details
   getPostBySlug: async (slug: string) => {
     try {
+      // Include depth of 2 to get nested references (e.g., author data)
       const response = await contentfulClient.getEntries({
         content_type: 'post',
         'fields.slug': slug,
@@ -69,6 +72,7 @@ export const contentfulQueries = {
     }
   },
 
+  // Fetch the featured hero post marked with hero flag
   getHeroPost: async () => {
     try {
       const response = await contentfulClient.getEntries({
@@ -96,6 +100,7 @@ export const contentfulQueries = {
     }
   },
 
+  // Fetch all available categories for navigation and filtering
   getCategories: async () => {
     const response = await contentfulClient.getEntries({
       content_type: 'category',
@@ -110,7 +115,9 @@ export const contentfulQueries = {
     }));
   },
 
+  // Fetch all posts associated with a specific category
   getPostsByCategory: async (categorySlug: string) => {
+    // First find the category entry
     const categoryResponse = await contentfulClient.getEntries({
       content_type: 'category',
       'fields.slug[in]': categorySlug,
@@ -119,6 +126,7 @@ export const contentfulQueries = {
 
     if (!categoryResponse.items.length) return [];
 
+    // Then find all posts linked to this category
     const response = await contentfulClient.getEntries({
       content_type: 'post',
       links_to_entry: categoryResponse.items[0].sys.id,
@@ -138,12 +146,14 @@ export const contentfulQueries = {
     }));
   },
 
+  // Fetch footer content and settings
   getFooter: async () => {
     const response = await contentfulClient.getEntries({
       content_type: 'footer',
       limit: 1,
     });
 
+    // Return default footer content if no custom footer is defined
     if (response.items.length) {
       return {
         title: 'Korkkikierre',
@@ -152,6 +162,7 @@ export const contentfulQueries = {
       };
     }
 
+    // Parse and return custom footer content from Contentful
     const footer = response.items[0].fields;
     return {
       title: JSON.stringify(footer.footerTitle),
@@ -160,6 +171,7 @@ export const contentfulQueries = {
     };
   },
 
+  // Fetch main navigation menu items
   getMainNavigation: async () => {
     const response = await contentfulClient.getEntries({
       content_type: 'mainNavigation',
@@ -167,6 +179,7 @@ export const contentfulQueries = {
       limit: 1,
     });
 
+    // Return default navigation if no custom menu is defined
     if (
       !response.items.length ||
       !Array.isArray(response.items[0].fields?.menuItems)
@@ -174,6 +187,7 @@ export const contentfulQueries = {
       return [{ label: 'Etusivu', url: '/' }];
     }
 
+    // Transform navigation items to expected format
     return response.items[0].fields.menuItems.map((item: any) => ({
       label: item.fields.title,
       url: item.fields.url,

@@ -6,11 +6,13 @@ interface CategoryPostsProps {
   categorySlug: string;
 }
 
+// Component to display all posts within a specific category
 export default async function CategoryPosts({
   categorySlug,
 }: CategoryPostsProps) {
   const posts = await contentfulQueries.getPostsByCategory(categorySlug);
 
+  // Handle empty category case
   if (!posts.length) {
     return <p>Ei artikkeleita tässä kategoriassa.</p>;
   }
@@ -22,6 +24,7 @@ export default async function CategoryPosts({
           key={post.id}
           className="bg-white overflow-hidden rounded shadow-sm transition-shadow hover:shadow-md"
         >
+          {/* Post preview card with image and excerpt */}
           <Link href={`/blog/${post.id}`}>
             <div className="relative h-64 w-full">
               <Image
