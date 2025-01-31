@@ -1,5 +1,4 @@
 import { contentfulClient } from './client';
-import type { BlogPost, Category, Footer } from './types';
 import { Document } from '@contentful/rich-text-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
@@ -118,5 +117,25 @@ export const contentfulQueries = {
       content: documentToReactComponents(footer.footerContent as Document),
       copyright: JSON.stringify(footer.footerCopyright),
     };
+  },
+
+  getMainNavigation: async () => {
+    const response = await contentfulClient.getEntries({
+      content_type: 'mainNavigation',
+      'fields.title': 'Main menu',
+      limit: 1,
+    });
+
+    if (
+      !response.items.length ||
+      !Array.isArray(response.items[0].fields?.menuItems)
+    ) {
+      return [{ label: 'Etusivu', url: '/' }];
+    }
+
+    return response.items[0].fields.menuItems.map((item: any) => ({
+      label: item.fields.title,
+      url: item.fields.url,
+    }));
   },
 };

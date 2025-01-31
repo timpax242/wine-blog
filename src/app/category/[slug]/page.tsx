@@ -9,7 +9,7 @@ export default async function CategoryPage({
 }: {
   params: { slug: string };
 }) {
-  const { slug } = params;
+  const { slug } = await params;
   const categories = await contentfulQueries.getCategories();
   const category = categories.find((cat) => cat.slug === slug);
 

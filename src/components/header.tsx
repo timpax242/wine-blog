@@ -1,15 +1,11 @@
-'use client';
-
-import { useState } from 'react';
-import { Wine, Menu, X } from 'lucide-react';
+import { Wine } from 'lucide-react';
 import Link from 'next/link';
+import NavLinks from './nav-links';
+import MobileMenu from './mobile-menu';
+import { contentfulQueries } from '@/lib/contentful/queries';
 
-export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+export default async function Header() {
+  const navItems = await contentfulQueries.getMainNavigation();
 
   return (
     <header className="bg-burgundy-900 text-white p-4">
@@ -23,89 +19,17 @@ export default function Header() {
             Korkkikierre
           </span>
         </Link>
+
+        {/* Desktop Navigation */}
         <nav className="hidden md:block">
-          <ul className="flex space-x-4">
-            <li>
-              <Link
-                href="/"
-                className="hover:text-burgundy-200 transition-colors"
-              >
-                Etusivu
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/reviews"
-                className="hover:text-burgundy-200 transition-colors"
-              >
-                Arvostelut
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/regions"
-                className="hover:text-burgundy-200 transition-colors"
-              >
-                Alueet
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/about"
-                className="hover:text-burgundy-200 transition-colors"
-              >
-                Tietoa
-              </Link>
-            </li>
-          </ul>
+          <NavLinks items={navItems} className="flex space-x-6" />
         </nav>
+
+        {/* Mobile Navigation */}
         <div className="md:hidden">
-          <button
-            onClick={toggleMenu}
-            className="text-white focus:outline-none"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <MobileMenu items={navItems} />
         </div>
       </div>
-      {isMenuOpen && (
-        <nav className="md:hidden mt-4">
-          <ul className="flex flex-col space-y-2">
-            <li>
-              <Link
-                href="/"
-                className="block hover:text-burgundy-200 transition-colors"
-              >
-                Etusivu
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/reviews"
-                className="block hover:text-burgundy-200 transition-colors"
-              >
-                Arvostelut
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/regions"
-                className="block hover:text-burgundy-200 transition-colors"
-              >
-                Alueet
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/about"
-                className="block hover:text-burgundy-200 transition-colors"
-              >
-                Tietoa
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      )}
     </header>
   );
 }

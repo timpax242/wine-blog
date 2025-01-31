@@ -20,8 +20,8 @@ export default async function ArticleList() {
                 <Image
                   src={article.image || '/placeholder.svg'}
                   alt={article.title}
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  className="object-cover"
                 />
               </div>
               <div className="p-6">

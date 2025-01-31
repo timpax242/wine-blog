@@ -51,8 +51,8 @@ export default async function Sidebar() {
                 <Image
                   src={post.image || '/placeholder.svg'}
                   alt={post.title}
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  className="object-cover"
                 />
               </div>
               <a
