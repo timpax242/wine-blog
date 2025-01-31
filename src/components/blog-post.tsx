@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Header from './header';
 import Footer from './footer';
+import { AuthorProfile } from './author-profile';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 interface BlogPostProps {
@@ -9,7 +10,11 @@ interface BlogPostProps {
   image: string;
   date: string;
   excerpt: string;
-  author?: string;
+  author?: {
+    name: string;
+    bio: string;
+    image: string;
+  };
   slug: string;
 }
 
@@ -37,17 +42,14 @@ export default function BlogPost({
             src={image}
             alt={title}
             fill
-            className="object-cover rounded-sm"
+            className="object-cover rounded-md"
             priority
           />
         </div>
-        <div>
+        <div className="max-w-[700px]">
           <h1 className="text-4xl font-bold mb-4">{title}</h1>
 
-          <div className="flex items-center gap-4 text-gray-600 mb-6">
-            {author && (
-              <span className="font-medium">Kirjoittanut: {author}</span>
-            )}
+          <div className="flex flex-col text-gray-600 mb-6">
             {date && (
               <time dateTime={date} className="text-gray-500">
                 {formattedDate}
@@ -61,9 +63,17 @@ export default function BlogPost({
             </div>
           )}
 
-          <div className="prose prose-lg max-w-[700px] prose-headings:text-burgundy-900 prose-a:text-burgundy-700">
+          <div className="prose prose-lg prose-headings:text-burgundy-900 prose-a:text-burgundy-700">
             {documentToReactComponents(content)}
           </div>
+
+          {author && author.name && (
+            <AuthorProfile
+              name={author.name}
+              bio={author.bio || ''}
+              image={author.image || '/placeholder-author.jpg'}
+            />
+          )}
         </div>
       </article>
     </main>

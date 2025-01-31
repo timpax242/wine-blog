@@ -41,6 +41,7 @@ export const contentfulQueries = {
         content_type: 'post',
         'fields.slug': slug,
         limit: 1,
+        include: 2,
       });
 
       if (!response.items.length) return null;
@@ -52,10 +53,16 @@ export const contentfulQueries = {
         title: fields.title,
         slug: fields.slug,
         excerpt: fields.excerpt,
-        content: fields.content,
+        content: fields.content as unknown as Document,
         image: ensureAbsoluteUrl(fields.coverImage?.fields?.file?.url),
         date: fields.date,
-        author: fields.author?.fields?.name,
+        author: {
+          name: fields.author?.fields?.name,
+          bio: fields.author?.fields?.bio,
+          image: ensureAbsoluteUrl(
+            fields.author?.fields?.image?.fields?.file?.url
+          ),
+        },
       };
     } catch {
       return null;
