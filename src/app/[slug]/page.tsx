@@ -18,3 +18,11 @@ export default async function BlogPostPage({
 
 // Optional: Add static generation with revalidation
 export const revalidate = 3600; // Revalidate every hour
+
+// Generate static params for all blog posts
+export async function generateStaticParams() {
+  const posts = await contentfulQueries.getAllPosts();
+  return posts.posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
