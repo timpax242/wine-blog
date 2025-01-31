@@ -50,9 +50,11 @@ export default function BlogPost({
               {author && (
                 <span className="font-medium">Kirjoittanut: {author}</span>
               )}
-              <time dateTime={date} className="text-gray-500">
-                {formattedDate}
-              </time>
+              {date && (
+                <time dateTime={date} className="text-gray-500">
+                  {formattedDate}
+                </time>
+              )}
             </div>
 
             {excerpt && (

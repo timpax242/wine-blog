@@ -15,7 +15,7 @@ export default async function ArticleList() {
             key={article.id}
             className="bg-white overflow-hidden rounded shadow-sm transition-shadow hover:shadow-md"
           >
-            <Link href={`/blog/${article.id}`}>
+            <Link href={`/${article.slug}`}>
               <div className="relative h-64 w-full">
                 <Image
                   src={article.image || '/placeholder.svg'}

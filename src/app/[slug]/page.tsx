@@ -4,10 +4,10 @@ import { contentfulQueries } from '@/lib/contentful/queries';
 export default async function BlogPostPage({
   params,
 }: {
-  params: { id: string };
+  params: { slug: string };
 }) {
-  const { id } = await params;
-  const post = await contentfulQueries.getPostById(id);
+  const { slug } = await params;
+  const post = await contentfulQueries.getPostBySlug(slug);
 
   if (!post) {
     return <div>Artikkelia ei löytynyt</div>;

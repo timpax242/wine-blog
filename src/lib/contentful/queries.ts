@@ -35,20 +35,54 @@ export const contentfulQueries = {
     };
   },
 
-  getPostById: async (id: string) => {
+  getPostBySlug: async (slug: string) => {
     try {
-      const post = await contentfulClient.getEntry(id);
+      const response = await contentfulClient.getEntries({
+        content_type: 'post',
+        'fields.slug': slug,
+        limit: 1,
+      });
+
+      if (!response.items.length) return null;
+
+      const fields = response.items[0].fields as any;
+
       return {
-        id: post.sys.id,
-        title: post.fields.title,
-        slug: post.fields.slug,
-        excerpt: post.fields.excerpt,
-        content: post.fields.content,
-        image: ensureAbsoluteUrl(
-          (post.fields as any).coverImage?.fields?.file?.url
-        ),
-        date: (post.fields as any).date,
-        author: (post.fields as any).author?.fields?.name,
+        id: response.items[0].sys.id,
+        title: fields.title,
+        slug: fields.slug,
+        excerpt: fields.excerpt,
+        content: fields.content,
+        image: ensureAbsoluteUrl(fields.coverImage?.fields?.file?.url),
+        date: fields.date,
+        author: fields.author?.fields?.name,
+      };
+    } catch {
+      return null;
+    }
+  },
+
+  getHeroPost: async () => {
+    try {
+      const response = await contentfulClient.getEntries({
+        content_type: 'post',
+        'fields.hero': true,
+        limit: 1,
+      });
+
+      if (!response.items.length) return null;
+
+      const fields = response.items[0].fields as any;
+
+      return {
+        id: response.items[0].sys.id,
+        title: fields.title,
+        slug: fields.slug,
+        excerpt: fields.excerpt,
+        content: fields.content,
+        image: ensureAbsoluteUrl(fields.coverImage?.fields?.file?.url),
+        date: fields.date,
+        author: fields.author?.fields?.name,
       };
     } catch {
       return null;

@@ -11,7 +11,7 @@ export default function KorkkikierreFrontPage() {
       <main className="flex-grow">
         <Hero />
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex flex-col lg:flex-row gap-8 mt-8">
             <ArticleList />
             <Sidebar />
           </div>

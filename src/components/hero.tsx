@@ -3,16 +3,15 @@ import Link from 'next/link';
 import { contentfulQueries } from '@/lib/contentful/queries';
 
 export default async function Hero() {
-  const { posts } = await contentfulQueries.getAllPosts(1, 1);
-  const latestPost = posts[0];
+  const latestHeroPost = await contentfulQueries.getHeroPost();
 
-  if (!latestPost) return null;
+  if (!latestHeroPost) return null;
 
   return (
     <section className="relative h-[70vh] w-full mb-12">
       <Image
-        src={latestPost.image}
-        alt={latestPost.title}
+        src={latestHeroPost.image}
+        alt={latestHeroPost.title}
         fill
         className="object-cover"
         priority
@@ -20,11 +19,11 @@ export default async function Hero() {
       <div className="absolute inset-0 bg-black/40" />
       <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-white text-center">
         <h2 className="text-3xl font-bold mb-4 max-w-3xl">
-          {latestPost.title}
+          {latestHeroPost.title}
         </h2>
-        <p className="text-lg mb-6 max-w-2xl">{latestPost.excerpt}</p>
+        <p className="text-lg mb-6 max-w-2xl">{latestHeroPost.excerpt}</p>
         <Link
-          href={`/blog/${latestPost.id}`}
+          href={`/${latestHeroPost.slug}`}
           className="inline-block bg-burgundy-700 text-white px-6 py-2 rounded hover:bg-burgundy-800 transition-colors"
         >
           Lue lisää
