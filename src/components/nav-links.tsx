@@ -3,7 +3,7 @@ import Link from 'next/link';
 // Interface for navigation items with label and URL
 interface NavLinksProps {
   items: {
-    label: string;
+    title: string;
     url: string;
   }[];
   className?: string; // Optional className for styling flexibility
@@ -20,7 +20,7 @@ export default function NavLinks({ items, className }: NavLinksProps) {
             href={item.url}
             className="text-white hover:text-burgundy-200 transition-colors"
           >
-            {item.label}
+            {item.title}
           </Link>
         </li>
       ))}

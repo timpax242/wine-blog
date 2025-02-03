@@ -1,13 +1,12 @@
 import Image from 'next/image';
-import Header from './header';
-import Footer from './footer';
 import { AuthorProfile } from './author-profile';
+import { Document } from '@contentful/rich-text-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 interface BlogPostProps {
   title: string;
-  content: any; // Contentful Rich Text document
-  image: string;
+  content: Document; // Using Contentful's Document type
+  coverImage: string;
   date: string;
   excerpt: string;
   author?: {
@@ -15,7 +14,6 @@ interface BlogPostProps {
     bio: string;
     image: string;
   };
-  slug: string;
 }
 
 export default function BlogPost({
@@ -25,7 +23,6 @@ export default function BlogPost({
   date,
   excerpt,
   author,
-  slug,
 }: BlogPostProps) {
   // Format the date to Finnish locale with full month name
   const formattedDate = new Date(date).toLocaleDateString('fi-FI', {

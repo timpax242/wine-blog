@@ -1,5 +1,3 @@
-import Header from '@/components/header';
-import Footer from '@/components/footer';
 import CategoryPosts from '@/components/category-posts';
 import { contentfulQueries } from '@/lib/contentful/queries';
 import { notFound } from 'next/navigation';
