@@ -10,7 +10,6 @@ interface MobileMenuProps {
     label: string;
     url: string;
   }[];
-  className?: string; // Optional styling prop
 }
 
 // Client-side mobile menu component with toggle functionality
