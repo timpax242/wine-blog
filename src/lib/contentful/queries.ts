@@ -8,65 +8,6 @@ import {
 } from './types/';
 
 /**
- * Represents an image asset from Contentful
- * Contains metadata and file information
- */
-export interface Image {
-  fields: {
-    title: string;
-    file: {
-      fileName: string;
-      contentType: string;
-      details: {
-        image: {
-          width: number;
-          height: number;
-        };
-        size: number;
-      };
-      url: string;
-    };
-    description: string;
-  };
-}
-
-/**
- * Represents an author with their profile information
- * Contains optional bio and profile image
- */
-export interface Author {
-  fields: {
-    name: string;
-    bio?: string;
-    image?: Image;
-  };
-}
-
-/**
- * Represents a navigation menu item
- * Used for building site navigation structure
- */
-export interface MenuItem {
-  fields: {
-    title: string;
-    url: string;
-    order?: number;
-    isExternal?: boolean;
-  };
-}
-
-export interface Post {
-  title: string;
-  slug: string;
-  hero?: boolean;
-  content: Document;
-  excerpt?: string;
-  coverImage: Image;
-  date?: Date;
-  author?: Author;
-}
-
-/**
  * Ensures URLs are absolute by prepending https: if needed
  * Falls back to placeholder image if URL is undefined
  */
@@ -91,25 +32,34 @@ export const contentfulQueries = {
       limit,
       skip,
       order: ['-sys.createdAt'],
+      include: 2,
     });
 
-    const posts = response.items.map((entry) => {
+    const posts = response.items.map((item) => {
       return {
-        title: entry.fields.title,
-        slug: entry.fields.slug,
-        excerpt: entry.fields.excerpt,
-        content: entry.fields?.content,
-        image: ensureAbsoluteUrl(
-          (entry.fields.coverImage as Image).fields.file?.url
-        ),
-        date: entry.fields?.date,
-        author: (entry.fields?.author as Author)?.fields && {
-          name: (entry.fields?.author as Author)?.fields.name,
-          bio: (entry.fields?.author as Author)?.fields.bio,
-          image: ensureAbsoluteUrl(
-            (entry.fields?.author as Author)?.fields.image?.fields?.file?.url
-          ),
-        },
+        title: item.fields.title,
+        slug: item.fields.slug,
+        excerpt: item.fields.excerpt,
+        content: item.fields?.content,
+        image:
+          item.fields.coverImage && 'fields' in item.fields.coverImage
+            ? ensureAbsoluteUrl(item.fields.coverImage.fields.file?.url)
+            : undefined,
+        date: item.fields?.date,
+        author:
+          item.fields.author && 'fields' in item.fields.author
+            ? {
+                name: item.fields.author.fields.name,
+                bio: item.fields.author.fields.bio,
+                image:
+                  item.fields.author.fields.image &&
+                  'fields' in item.fields.author.fields.image
+                    ? ensureAbsoluteUrl(
+                        item.fields.author.fields.image.fields.file?.url
+                      )
+                    : undefined,
+              }
+            : undefined,
       };
     });
 
@@ -127,21 +77,23 @@ export const contentfulQueries = {
    * @param limit - Number of random posts to return
    */
   getRandomPosts: async (limit = 3) => {
-    const entries = await contentfulClient.getEntries<TypePostSkeleton>({
+    const response = await contentfulClient.getEntries<TypePostSkeleton>({
       content_type: 'post',
       limit: 100, // Fetch more to randomize from
       select: ['fields.title', 'fields.slug', 'fields.coverImage'],
+      include: 2,
     });
 
     // Shuffle and take first 3
-    const shuffled = entries.items.sort(() => 0.5 - Math.random());
+    const shuffled = response.items.sort(() => 0.5 - Math.random());
 
-    return shuffled.slice(0, limit).map((entry) => ({
-      title: entry.fields.title as string,
-      slug: entry.fields.slug as string,
-      image: ensureAbsoluteUrl(
-        (entry.fields?.coverImage as Image)?.fields?.file?.url
-      ),
+    return shuffled.slice(0, limit).map((item) => ({
+      title: item.fields.title,
+      slug: item.fields.slug,
+      image:
+        item.fields.coverImage && 'fields' in item.fields.coverImage
+          ? ensureAbsoluteUrl(item.fields.coverImage.fields.file?.url)
+          : undefined,
     }));
   },
 
@@ -167,17 +119,25 @@ export const contentfulQueries = {
         slug: item.fields.slug,
         excerpt: item.fields.excerpt,
         content: item.fields.content,
-        image: ensureAbsoluteUrl(
-          (item.fields.coverImage as Image).fields.file?.url
-        ),
+        image:
+          item.fields.coverImage && 'fields' in item.fields.coverImage
+            ? ensureAbsoluteUrl(item.fields.coverImage.fields.file?.url)
+            : undefined,
         date: item.fields?.date,
-        author: (item.fields?.author as Author)?.fields && {
-          name: (item.fields?.author as Author)?.fields.name,
-          bio: (item.fields?.author as Author)?.fields.bio,
-          image: ensureAbsoluteUrl(
-            (item.fields?.author as Author)?.fields.image?.fields?.file?.url
-          ),
-        },
+        author:
+          item.fields.author && 'fields' in item.fields.author
+            ? {
+                name: item.fields.author.fields.name,
+                bio: item.fields.author.fields.bio,
+                image:
+                  item.fields.author.fields.image &&
+                  'fields' in item.fields.author.fields.image
+                    ? ensureAbsoluteUrl(
+                        item.fields.author.fields.image.fields.file?.url
+                      )
+                    : undefined,
+              }
+            : undefined,
       };
     } catch {
       return null;
@@ -194,30 +154,36 @@ export const contentfulQueries = {
         content_type: 'post',
         'fields.hero': true,
         limit: 1,
+        include: 2,
       });
 
       if (!response.items.length) return null;
 
       const item = response.items[0];
       return {
-        title:
-          typeof item.fields.title === 'string'
-            ? item.fields.title
-            : item.fields.title['en-US'],
+        title: item.fields.title,
         slug: item.fields.slug,
         excerpt: item.fields.excerpt,
         content: item.fields.content,
-        image: ensureAbsoluteUrl(
-          (item.fields.coverImage as Image).fields.file?.url
-        ),
+        image:
+          item.fields.coverImage && 'fields' in item.fields.coverImage
+            ? ensureAbsoluteUrl(item.fields.coverImage.fields.file?.url)
+            : undefined,
         date: item.fields?.date,
-        author: (item.fields?.author as Author)?.fields && {
-          name: (item.fields?.author as Author)?.fields.name,
-          bio: (item.fields?.author as Author)?.fields.bio,
-          image: ensureAbsoluteUrl(
-            (item.fields?.author as Author)?.fields.image?.fields?.file?.url
-          ),
-        },
+        author:
+          item.fields.author && 'fields' in item.fields.author
+            ? {
+                name: item.fields.author.fields.name,
+                bio: item.fields.author.fields.bio,
+                image:
+                  item.fields.author.fields.image &&
+                  'fields' in item.fields.author.fields.image
+                    ? ensureAbsoluteUrl(
+                        item.fields.author.fields.image.fields.file?.url
+                      )
+                    : undefined,
+              }
+            : undefined,
       };
     } catch {
       return null;
@@ -251,6 +217,7 @@ export const contentfulQueries = {
         content_type: 'category',
         'fields.slug': categorySlug,
         limit: 1,
+        include: 2,
       });
 
     if (!categoryResponse.items.length) return [];
@@ -263,24 +230,29 @@ export const contentfulQueries = {
     });
 
     return response.items.map((item) => ({
-      title:
-        typeof item.fields.title === 'string'
-          ? item.fields.title
-          : item.fields.title['en-US'],
+      title: item.fields.title,
       slug: item.fields.slug,
       excerpt: item.fields.excerpt,
       content: item.fields.content,
-      image: ensureAbsoluteUrl(
-        (item.fields.coverImage as Image).fields.file?.url
-      ),
+      image:
+        item.fields.coverImage && 'fields' in item.fields.coverImage
+          ? ensureAbsoluteUrl(item.fields.coverImage.fields.file?.url)
+          : undefined,
       date: item.fields?.date,
-      author: (item.fields?.author as Author)?.fields && {
-        name: (item.fields?.author as Author)?.fields.name,
-        bio: (item.fields?.author as Author)?.fields.bio,
-        image: ensureAbsoluteUrl(
-          (item.fields?.author as Author)?.fields.image?.fields?.file?.url
-        ),
-      },
+      author:
+        item.fields.author && 'fields' in item.fields.author
+          ? {
+              name: item.fields.author.fields.name,
+              bio: item.fields.author.fields.bio,
+              image:
+                item.fields.author.fields.image &&
+                'fields' in item.fields.author.fields.image
+                  ? ensureAbsoluteUrl(
+                      item.fields.author.fields.image.fields.file?.url
+                    )
+                  : undefined,
+            }
+          : undefined,
     }));
   },
 
@@ -297,6 +269,7 @@ export const contentfulQueries = {
           content_type: 'mainNavigation',
           'fields.title': 'Main menu',
           limit: 1,
+          include: 2,
         });
 
       if (!response.items.length || !response.items[0].fields.menuItems) {
@@ -304,8 +277,8 @@ export const contentfulQueries = {
       }
 
       return response.items[0].fields.menuItems.map((item) => ({
-        title: (item as unknown as MenuItem).fields.title,
-        url: (item as unknown as MenuItem).fields.url,
+        title: item && 'fields' in item ? (item.fields.title as string) : '',
+        url: item && 'fields' in item ? (item.fields.url as string) : '#',
       }));
     } catch {
       return defaultMenu;

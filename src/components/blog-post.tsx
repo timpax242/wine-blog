@@ -6,13 +6,13 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 interface BlogPostProps {
   title: string;
   content: Document; // Using Contentful's Document type
-  image: string;
+  image: string | undefined;
   date: string | undefined;
   excerpt: string | undefined;
   author?: {
     name: string;
     bio: string | undefined;
-    image: string;
+    image: string | undefined;
   };
 }
 
