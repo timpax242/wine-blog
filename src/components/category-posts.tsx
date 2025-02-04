@@ -19,13 +19,13 @@ export default async function CategoryPosts({
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {posts.map((post) => (
+      {posts.map((post, index) => (
         <article
-          key={post.id}
+          key={'article-' + index}
           className="bg-white overflow-hidden rounded shadow-sm transition-shadow hover:shadow-md"
         >
           {/* Post preview card with image and excerpt */}
-          <Link href={`/blog/${post.id}`}>
+          <Link href={`/blog/${post.slug}`}>
             <div className="relative h-64 w-full">
               <Image
                 src={post.image || '/placeholder.svg'}

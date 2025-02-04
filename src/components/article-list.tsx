@@ -13,9 +13,9 @@ export default async function ArticleList() {
       <h2 className="text-2xl font-bold mb-8">Viimeisimmät artikkelit</h2>
       {/* Responsive grid layout: 1 column on mobile, 2 columns on medium screens */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {articlesToShow.map((article) => (
+        {articlesToShow.map((article, index) => (
           <article
-            key={article.id}
+            key={'article-' + index}
             className="bg-white overflow-hidden rounded shadow-sm transition-shadow hover:shadow-md"
           >
             {/* Article card with image and preview content */}

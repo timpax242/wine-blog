@@ -7,7 +7,7 @@ import NavLinks from './nav-links';
 // Props interface for mobile menu component
 interface MobileMenuProps {
   items: {
-    label: string;
+    title: string;
     url: string;
   }[];
 }

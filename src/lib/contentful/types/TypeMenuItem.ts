@@ -1,8 +1,8 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
 
 export interface TypeMenuItemFields {
-    title?: EntryFieldTypes.Symbol;
-    url?: EntryFieldTypes.Symbol;
+    title: EntryFieldTypes.Symbol;
+    url: EntryFieldTypes.Symbol;
     order?: EntryFieldTypes.Integer;
     isExternal?: EntryFieldTypes.Boolean;
 }

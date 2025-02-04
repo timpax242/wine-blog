@@ -7,11 +7,11 @@ interface BlogPostProps {
   title: string;
   content: Document; // Using Contentful's Document type
   image: string;
-  date: string;
-  excerpt: string;
+  date: string | undefined;
+  excerpt: string | undefined;
   author?: {
     name: string;
-    bio: string;
+    bio: string | undefined;
     image: string;
   };
 }
@@ -25,11 +25,13 @@ export default function BlogPost({
   author,
 }: BlogPostProps) {
   // Format the date to Finnish locale with full month name
-  const formattedDate = new Date(date).toLocaleDateString('fi-FI', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+  const formattedDate = date
+    ? new Date(date).toLocaleDateString('fi-FI', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : undefined;
 
   return (
     <main className="flex-grow container mx-auto px-4 py-8">

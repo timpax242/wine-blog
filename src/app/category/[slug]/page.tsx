@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation';
 export default async function CategoryPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
   const categories = await contentfulQueries.getCategories();
@@ -23,9 +23,6 @@ export default async function CategoryPage({
       <div className="bg-burgundy-700 text-white py-12 mb-8">
         <div className="container mx-auto text-center px-4">
           <h1 className="text-3xl font-bold mb-4">{category.name}</h1>
-          {category.description && (
-            <p className="text-xl opacity-90">{category.description}</p>
-          )}
         </div>
       </div>
 

@@ -48,8 +48,8 @@ export interface Author {
  */
 export interface MenuItem {
   fields: {
-    title?: string;
-    url?: string;
+    title: string;
+    url: string;
     order?: number;
     isExternal?: boolean;
   };
@@ -304,8 +304,8 @@ export const contentfulQueries = {
       }
 
       return response.items[0].fields.menuItems.map((item) => ({
-        title: (item as MenuItem).fields.title,
-        url: (item as MenuItem).fields.url,
+        title: (item as unknown as MenuItem).fields.title,
+        url: (item as unknown as MenuItem).fields.url,
       }));
     } catch {
       return defaultMenu;

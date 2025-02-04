@@ -5,7 +5,7 @@ import { contentfulQueries } from '@/lib/contentful/queries';
 export default async function BlogPostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
   const post = await contentfulQueries.getPostBySlug(slug);
