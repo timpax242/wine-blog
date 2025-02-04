@@ -34,6 +34,7 @@ export default function MobileMenu({ items }: MobileMenuProps) {
             {/* Reuse NavLinks component with mobile-specific styling */}
             <NavLinks
               items={items}
+              handleClick={() => setIsOpen(false)}
               className="flex flex-col space-y-4 text-left"
             />
           </div>
