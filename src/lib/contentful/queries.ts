@@ -1,6 +1,5 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { contentfulClient } from './client';
-import { Entry } from 'contentful';
 import {
   TypeCategorySkeleton,
   TypeFooterSkeleton,
@@ -56,31 +55,15 @@ export interface MenuItem {
   };
 }
 
-/**
- * Maps Contentful post entry fields to a normalized post object
- * Handles nested author data and ensures image URLs are absolute
- * @param item - Raw Contentful post entry
- * @returns Normalized post object with processed fields
- */
-function mapPostFields(item: Entry<TypePostSkeleton>) {
-  return {
-    title: item.fields.title,
-    slug: item.fields.slug,
-    excerpt: item.fields.excerpt,
-    content: item.fields?.content,
-    image: ensureAbsoluteUrl(
-      (item.fields.coverImage as Image).fields.file?.url
-    ),
-    date: item.fields?.date,
-    author: (item.fields?.author as unknown as Author)?.fields && {
-      name: (item.fields?.author as unknown as Author)?.fields.name,
-      bio: (item.fields?.author as unknown as Author)?.fields.bio,
-      image: ensureAbsoluteUrl(
-        (item.fields?.author as unknown as Author)?.fields.image?.fields?.file
-          ?.url
-      ),
-    },
-  };
+export interface Post {
+  title: string;
+  slug: string;
+  hero?: boolean;
+  content: Document;
+  excerpt?: string;
+  coverImage: Image;
+  date?: Date;
+  author?: Author;
 }
 
 /**
@@ -110,8 +93,28 @@ export const contentfulQueries = {
       order: ['-sys.createdAt'],
     });
 
+    const posts = response.items.map((entry) => {
+      return {
+        title: entry.fields.title,
+        slug: entry.fields.slug,
+        excerpt: entry.fields.excerpt,
+        content: entry.fields?.content,
+        image: ensureAbsoluteUrl(
+          (entry.fields.coverImage as Image).fields.file?.url
+        ),
+        date: entry.fields?.date,
+        author: (entry.fields?.author as Author)?.fields && {
+          name: (entry.fields?.author as Author)?.fields.name,
+          bio: (entry.fields?.author as Author)?.fields.bio,
+          image: ensureAbsoluteUrl(
+            (entry.fields?.author as Author)?.fields.image?.fields?.file?.url
+          ),
+        },
+      };
+    });
+
     return {
-      posts: response.items.map(mapPostFields),
+      posts: posts,
       total: response.total,
       currentPage: page,
       totalPages: Math.ceil(response.total / limit),
@@ -151,7 +154,7 @@ export const contentfulQueries = {
     try {
       const response = await contentfulClient.getEntries<TypePostSkeleton>({
         content_type: 'post',
-        'fields.slug[in]': [slug], // Use an array for safety
+        'fields.slug[in]': [slug],
         limit: 1,
         include: 2,
       });
@@ -159,8 +162,23 @@ export const contentfulQueries = {
       if (!response.items.length) return null;
 
       const item = response.items[0];
-
-      return mapPostFields(item);
+      return {
+        title: item.fields.title,
+        slug: item.fields.slug,
+        excerpt: item.fields.excerpt,
+        content: item.fields.content,
+        image: ensureAbsoluteUrl(
+          (item.fields.coverImage as Image).fields.file?.url
+        ),
+        date: item.fields?.date,
+        author: (item.fields?.author as Author)?.fields && {
+          name: (item.fields?.author as Author)?.fields.name,
+          bio: (item.fields?.author as Author)?.fields.bio,
+          image: ensureAbsoluteUrl(
+            (item.fields?.author as Author)?.fields.image?.fields?.file?.url
+          ),
+        },
+      };
     } catch {
       return null;
     }
@@ -181,8 +199,26 @@ export const contentfulQueries = {
       if (!response.items.length) return null;
 
       const item = response.items[0];
-
-      return mapPostFields(item);
+      return {
+        title:
+          typeof item.fields.title === 'string'
+            ? item.fields.title
+            : item.fields.title['en-US'],
+        slug: item.fields.slug,
+        excerpt: item.fields.excerpt,
+        content: item.fields.content,
+        image: ensureAbsoluteUrl(
+          (item.fields.coverImage as Image).fields.file?.url
+        ),
+        date: item.fields?.date,
+        author: (item.fields?.author as Author)?.fields && {
+          name: (item.fields?.author as Author)?.fields.name,
+          bio: (item.fields?.author as Author)?.fields.bio,
+          image: ensureAbsoluteUrl(
+            (item.fields?.author as Author)?.fields.image?.fields?.file?.url
+          ),
+        },
+      };
     } catch {
       return null;
     }
@@ -226,7 +262,26 @@ export const contentfulQueries = {
       include: 2,
     });
 
-    return response.items.map(mapPostFields);
+    return response.items.map((item) => ({
+      title:
+        typeof item.fields.title === 'string'
+          ? item.fields.title
+          : item.fields.title['en-US'],
+      slug: item.fields.slug,
+      excerpt: item.fields.excerpt,
+      content: item.fields.content,
+      image: ensureAbsoluteUrl(
+        (item.fields.coverImage as Image).fields.file?.url
+      ),
+      date: item.fields?.date,
+      author: (item.fields?.author as Author)?.fields && {
+        name: (item.fields?.author as Author)?.fields.name,
+        bio: (item.fields?.author as Author)?.fields.bio,
+        image: ensureAbsoluteUrl(
+          (item.fields?.author as Author)?.fields.image?.fields?.file?.url
+        ),
+      },
+    }));
   },
 
   /**

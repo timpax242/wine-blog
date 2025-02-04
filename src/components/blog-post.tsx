@@ -6,7 +6,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 interface BlogPostProps {
   title: string;
   content: Document; // Using Contentful's Document type
-  coverImage: string;
+  image: string;
   date: string;
   excerpt: string;
   author?: {
