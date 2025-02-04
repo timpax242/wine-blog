@@ -1,9 +1,13 @@
-module.exports = {
+import type { Config } from 'tailwindcss';
+import type { PluginUtils } from 'tailwindcss/types/config';
+import typographyPlugin from '@tailwindcss/typography';
+
+const config: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
       fontFamily: {
-        cursive: ['Lobster', 'cursive'],
+        logo: ['var(--font-lobster)'],
       },
       colors: {
         burgundy: {
@@ -13,7 +17,7 @@ module.exports = {
           900: '#560C08',
         },
       },
-      typography: (theme) => ({
+      typography: ({ theme }: PluginUtils) => ({
         DEFAULT: {
           css: {
             color: theme('colors.gray.900'),
@@ -63,5 +67,7 @@ module.exports = {
       }),
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [typographyPlugin],
 };
+
+export default config;

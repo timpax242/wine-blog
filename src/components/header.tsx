@@ -19,9 +19,7 @@ export default async function Header() {
             {/* Animated dot indicator */}
             <div className="absolute -top-1 -right-1 w-3 h-3 bg-burgundy-200 rounded-full animate-pulse"></div>
           </div>
-          <span className="text-3xl font-cursive tracking-wide">
-            Korkkikierre
-          </span>
+          <span className="text-3xl font-logo tracking-wide">Korkkikierre</span>
         </Link>
 
         {/* Desktop Navigation - hidden on mobile */}

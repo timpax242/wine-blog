@@ -39,7 +39,7 @@ export default function BlogPost({
         {/* Hero image */}
         <div className="relative h-64 sm:h-96 w-full mb-8">
           <Image
-            src={image}
+            src={image || '/placeholder.svg'}
             alt={title}
             fill
             className="object-cover rounded-md"
@@ -77,7 +77,7 @@ export default function BlogPost({
             <AuthorProfile
               name={author.name}
               bio={author.bio || ''}
-              image={author.image || '/placeholder-author.jpg'}
+              image={author.image || '/placeholder.jpg'}
             />
           )}
         </div>

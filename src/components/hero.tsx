@@ -13,7 +13,7 @@ export default async function Hero() {
     <section className="relative h-[70vh] w-full mb-12">
       {/* Full-width background image */}
       <Image
-        src={latestHeroPost.image}
+        src={latestHeroPost.image || '/placeholder.svg'}
         alt={latestHeroPost.title}
         fill
         className="object-cover"
