@@ -1,0 +1,5094 @@
+{
+  "contentTypes": [
+    {
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "author",
+        "type": "ContentType",
+        "createdAt": "2025-01-15T14:47:51.128Z",
+        "updatedAt": "2025-01-31T13:15:06.730Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 9,
+        "publishedAt": "2025-01-31T13:15:06.730Z",
+        "firstPublishedAt": "2025-01-15T14:47:51.506Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 5,
+        "version": 10,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/content_types/author"
+      },
+      "displayField": "name",
+      "name": "Author",
+      "description": "Author of a blog post",
+      "fields": [
+        {
+          "id": "name",
+          "name": "Name",
+          "type": "Symbol",
+          "localized": false,
+          "required": true,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "bio",
+          "name": "Bio",
+          "type": "Symbol",
+          "localized": false,
+          "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "image",
+          "name": "Image",
+          "type": "Link",
+          "localized": false,
+          "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false,
+          "linkType": "Asset"
+        }
+      ]
+    },
+    {
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "post",
+        "type": "ContentType",
+        "createdAt": "2025-01-15T14:47:51.137Z",
+        "updatedAt": "2025-01-31T12:29:05.146Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 23,
+        "publishedAt": "2025-01-31T12:29:05.146Z",
+        "firstPublishedAt": "2025-01-15T14:47:52.177Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 12,
+        "version": 24,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/content_types/post"
+      },
+      "displayField": "title",
+      "name": "Post",
+      "description": "Blog post",
+      "fields": [
+        {
+          "id": "title",
+          "name": "Title",
+          "type": "Symbol",
+          "localized": false,
+          "required": true,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "slug",
+          "name": "Slug",
+          "type": "Symbol",
+          "localized": false,
+          "required": true,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "hero",
+          "name": "Hero",
+          "type": "Boolean",
+          "localized": false,
+          "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "content",
+          "name": "Content",
+          "type": "RichText",
+          "localized": false,
+          "required": true,
+          "validations": [
+            {
+              "enabledMarks": [
+                "bold",
+                "italic",
+                "underline",
+                "code"
+              ],
+              "message": "Only bold, italic, underline, and code marks are allowed"
+            },
+            {
+              "enabledNodeTypes": [
+                "heading-1",
+                "heading-2",
+                "heading-3",
+                "heading-4",
+                "heading-5",
+                "heading-6",
+                "ordered-list",
+                "unordered-list",
+                "hr",
+                "blockquote",
+                "embedded-entry-block",
+                "embedded-asset-block",
+                "hyperlink",
+                "entry-hyperlink",
+                "asset-hyperlink",
+                "embedded-entry-inline"
+              ],
+              "message": "Only heading 1, heading 2, heading 3, heading 4, heading 5, heading 6, ordered list, unordered list, horizontal rule, quote, block entry, asset, link to Url, link to entry, link to asset, and inline entry nodes are allowed"
+            },
+            {
+              "nodes": {
+                "asset-hyperlink": [
+                  {
+                    "size": {
+                      "max": 10
+                    },
+                    "message": null
+                  }
+                ],
+                "embedded-asset-block": [
+                  {
+                    "size": {
+                      "max": 10
+                    },
+                    "message": null
+                  }
+                ],
+                "embedded-entry-block": [
+                  {
+                    "size": {
+                      "max": 10
+                    },
+                    "message": null
+                  }
+                ],
+                "embedded-entry-inline": [
+                  {
+                    "size": {
+                      "max": 10
+                    },
+                    "message": null
+                  }
+                ],
+                "entry-hyperlink": [
+                  {
+                    "size": {
+                      "max": 10
+                    },
+                    "message": null
+                  }
+                ]
+              }
+            }
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "excerpt",
+          "name": "Excerpt",
+          "type": "Symbol",
+          "localized": false,
+          "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "coverImage",
+          "name": "Cover Image",
+          "type": "Link",
+          "localized": false,
+          "required": true,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false,
+          "linkType": "Asset"
+        },
+        {
+          "id": "date",
+          "name": "Date",
+          "type": "Date",
+          "localized": false,
+          "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "author",
+          "name": "Author",
+          "type": "Link",
+          "localized": false,
+          "required": false,
+          "validations": [
+            {
+              "linkContentType": [
+                "author"
+              ]
+            }
+          ],
+          "disabled": false,
+          "omitted": false,
+          "linkType": "Entry"
+        },
+        {
+          "id": "category",
+          "name": "Category",
+          "type": "Array",
+          "localized": false,
+          "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false,
+          "items": {
+            "type": "Link",
+            "validations": [
+              {
+                "linkContentType": [
+                  "category"
+                ]
+              }
+            ],
+            "linkType": "Entry"
+          }
+        }
+      ]
+    },
+    {
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "category",
+        "type": "ContentType",
+        "createdAt": "2025-01-30T11:05:59.789Z",
+        "updatedAt": "2025-01-30T11:15:56.628Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 11,
+        "publishedAt": "2025-01-30T11:15:56.628Z",
+        "firstPublishedAt": "2025-01-30T11:06:00.108Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 6,
+        "version": 12,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/content_types/category"
+      },
+      "displayField": "name",
+      "name": "Category",
+      "description": "Category with description",
+      "fields": [
+        {
+          "id": "name",
+          "name": "Name",
+          "type": "Symbol",
+          "localized": false,
+          "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "slug",
+          "name": "Slug",
+          "type": "Symbol",
+          "localized": false,
+          "required": true,
+          "validations": [
+            {
+              "unique": true
+            }
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "description",
+          "name": "Description",
+          "type": "RichText",
+          "localized": false,
+          "required": false,
+          "validations": [
+            {
+              "enabledNodeTypes": [
+                "heading-1",
+                "heading-2",
+                "heading-3",
+                "heading-4",
+                "heading-5",
+                "heading-6",
+                "ordered-list",
+                "unordered-list",
+                "hr",
+                "blockquote",
+                "embedded-entry-block",
+                "embedded-asset-block",
+                "hyperlink",
+                "entry-hyperlink",
+                "asset-hyperlink",
+                "embedded-entry-inline"
+              ],
+              "message": "Only heading 1, heading 2, heading 3, heading 4, heading 5, heading 6, ordered list, unordered list, horizontal rule, quote, block entry, asset, link to Url, link to entry, link to asset, and inline entry nodes are allowed"
+            },
+            {
+              "enabledMarks": [
+                "bold",
+                "italic",
+                "underline",
+                "code"
+              ],
+              "message": "Only bold, italic, underline, and code marks are allowed"
+            }
+          ],
+          "disabled": false,
+          "omitted": false
+        }
+      ]
+    },
+    {
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "footer",
+        "type": "ContentType",
+        "createdAt": "2025-01-30T12:30:48.270Z",
+        "updatedAt": "2025-01-30T12:32:21.671Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 3,
+        "publishedAt": "2025-01-30T12:32:21.671Z",
+        "firstPublishedAt": "2025-01-30T12:30:48.579Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 2,
+        "version": 4,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/content_types/footer"
+      },
+      "displayField": "footerTitle",
+      "name": "Footer",
+      "description": "Footer content",
+      "fields": [
+        {
+          "id": "footerTitle",
+          "name": "Footer title",
+          "type": "Symbol",
+          "localized": false,
+          "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "footerContent",
+          "name": "Footer content",
+          "type": "RichText",
+          "localized": false,
+          "required": false,
+          "validations": [
+            {
+              "enabledMarks": [
+                "bold",
+                "italic",
+                "underline",
+                "code",
+                "superscript",
+                "subscript",
+                "strikethrough"
+              ],
+              "message": "Only bold, italic, underline, code, superscript, subscript, and strikethrough marks are allowed"
+            },
+            {
+              "enabledNodeTypes": [
+                "heading-1",
+                "heading-2",
+                "heading-3",
+                "heading-4",
+                "heading-5",
+                "heading-6",
+                "ordered-list",
+                "unordered-list",
+                "hr",
+                "blockquote",
+                "embedded-entry-block",
+                "embedded-asset-block",
+                "table",
+                "asset-hyperlink",
+                "embedded-entry-inline",
+                "entry-hyperlink",
+                "hyperlink"
+              ],
+              "message": "Only heading 1, heading 2, heading 3, heading 4, heading 5, heading 6, ordered list, unordered list, horizontal rule, quote, block entry, asset, table, link to asset, inline entry, link to entry, and link to Url nodes are allowed"
+            },
+            {
+              "nodes": {
+              }
+            }
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "footerCopyright",
+          "name": "Footer copyright",
+          "type": "Symbol",
+          "localized": false,
+          "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        }
+      ]
+    },
+    {
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "mainNavigation",
+        "type": "ContentType",
+        "createdAt": "2025-01-31T09:40:56.818Z",
+        "updatedAt": "2025-01-31T09:55:08.068Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 5,
+        "publishedAt": "2025-01-31T09:55:08.068Z",
+        "firstPublishedAt": "2025-01-31T09:40:57.159Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 3,
+        "version": 6,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/content_types/mainNavigation"
+      },
+      "displayField": "title",
+      "name": "Main navigation",
+      "description": "Main navigation",
+      "fields": [
+        {
+          "id": "title",
+          "name": "Title",
+          "type": "Symbol",
+          "localized": false,
+          "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "menuItems",
+          "name": "Menu items",
+          "type": "Array",
+          "localized": false,
+          "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false,
+          "items": {
+            "type": "Link",
+            "validations": [
+            ],
+            "linkType": "Entry"
+          }
+        }
+      ]
+    },
+    {
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "menuItem",
+        "type": "ContentType",
+        "createdAt": "2025-01-31T09:42:38.569Z",
+        "updatedAt": "2025-01-31T09:42:39.069Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 1,
+        "publishedAt": "2025-01-31T09:42:39.069Z",
+        "firstPublishedAt": "2025-01-31T09:42:39.069Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 1,
+        "version": 2,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/content_types/menuItem"
+      },
+      "displayField": "title",
+      "name": "Menu item",
+      "description": "Menu items",
+      "fields": [
+        {
+          "id": "title",
+          "name": "Title",
+          "type": "Symbol",
+          "localized": false,
+          "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "url",
+          "name": "URL",
+          "type": "Symbol",
+          "localized": false,
+          "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "order",
+          "name": "Order",
+          "type": "Integer",
+          "localized": false,
+          "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "isExternal",
+          "name": "Is External",
+          "type": "Boolean",
+          "localized": false,
+          "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        }
+      ]
+    }
+  ],
+  "tags": [
+  ],
+  "editorInterfaces": [
+    {
+      "sys": {
+        "id": "default",
+        "type": "EditorInterface",
+        "space": {
+          "sys": {
+            "id": "kqxj525j4qxj",
+            "type": "Link",
+            "linkType": "Space"
+          }
+        },
+        "version": 10,
+        "createdAt": "2025-01-15T14:47:51.861Z",
+        "createdBy": {
+          "sys": {
+            "id": "57aJpJ3ZmXHa2ele71dqoM",
+            "type": "Link",
+            "linkType": "User"
+          }
+        },
+        "updatedAt": "2025-01-31T13:15:07.435Z",
+        "updatedBy": {
+          "sys": {
+            "id": "57aJpJ3ZmXHa2ele71dqoM",
+            "type": "Link",
+            "linkType": "User"
+          }
+        },
+        "contentType": {
+          "sys": {
+            "id": "author",
+            "type": "Link",
+            "linkType": "ContentType"
+          }
+        },
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        }
+      },
+      "controls": [
+        {
+          "fieldId": "name",
+          "widgetId": "singleLine",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "bio",
+          "widgetId": "singleLine",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "image",
+          "widgetId": "assetLinkEditor",
+          "widgetNamespace": "builtin"
+        }
+      ]
+    },
+    {
+      "sys": {
+        "id": "default",
+        "type": "EditorInterface",
+        "space": {
+          "sys": {
+            "id": "kqxj525j4qxj",
+            "type": "Link",
+            "linkType": "Space"
+          }
+        },
+        "version": 24,
+        "createdAt": "2025-01-15T14:47:52.375Z",
+        "createdBy": {
+          "sys": {
+            "id": "57aJpJ3ZmXHa2ele71dqoM",
+            "type": "Link",
+            "linkType": "User"
+          }
+        },
+        "updatedAt": "2025-01-31T12:29:05.709Z",
+        "updatedBy": {
+          "sys": {
+            "id": "57aJpJ3ZmXHa2ele71dqoM",
+            "type": "Link",
+            "linkType": "User"
+          }
+        },
+        "contentType": {
+          "sys": {
+            "id": "post",
+            "type": "Link",
+            "linkType": "ContentType"
+          }
+        },
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        }
+      },
+      "controls": [
+        {
+          "fieldId": "title",
+          "widgetId": "singleLine",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "slug",
+          "widgetId": "slugEditor",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "hero",
+          "widgetId": "boolean",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "content",
+          "widgetId": "richTextEditor",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "excerpt",
+          "widgetId": "singleLine",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "coverImage",
+          "widgetId": "assetLinkEditor",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "date",
+          "widgetId": "datePicker",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "author",
+          "widgetId": "entryLinkEditor",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "category",
+          "settings": {
+            "bulkEditing": false,
+            "showLinkEntityAction": true,
+            "showCreateEntityAction": false
+          },
+          "widgetId": "entryLinksEditor",
+          "widgetNamespace": "builtin"
+        }
+      ]
+    },
+    {
+      "sys": {
+        "id": "default",
+        "type": "EditorInterface",
+        "space": {
+          "sys": {
+            "id": "kqxj525j4qxj",
+            "type": "Link",
+            "linkType": "Space"
+          }
+        },
+        "version": 12,
+        "createdAt": "2025-01-30T11:06:00.245Z",
+        "createdBy": {
+          "sys": {
+            "id": "57aJpJ3ZmXHa2ele71dqoM",
+            "type": "Link",
+            "linkType": "User"
+          }
+        },
+        "updatedAt": "2025-01-30T11:15:57.389Z",
+        "updatedBy": {
+          "sys": {
+            "id": "57aJpJ3ZmXHa2ele71dqoM",
+            "type": "Link",
+            "linkType": "User"
+          }
+        },
+        "contentType": {
+          "sys": {
+            "id": "category",
+            "type": "Link",
+            "linkType": "ContentType"
+          }
+        },
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        }
+      },
+      "controls": [
+        {
+          "fieldId": "name",
+          "widgetId": "singleLine",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "slug",
+          "widgetId": "slugEditor",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "description",
+          "widgetId": "richTextEditor",
+          "widgetNamespace": "builtin"
+        }
+      ]
+    },
+    {
+      "sys": {
+        "id": "default",
+        "type": "EditorInterface",
+        "space": {
+          "sys": {
+            "id": "kqxj525j4qxj",
+            "type": "Link",
+            "linkType": "Space"
+          }
+        },
+        "version": 4,
+        "createdAt": "2025-01-30T12:30:48.715Z",
+        "createdBy": {
+          "sys": {
+            "id": "57aJpJ3ZmXHa2ele71dqoM",
+            "type": "Link",
+            "linkType": "User"
+          }
+        },
+        "updatedAt": "2025-01-30T12:32:22.331Z",
+        "updatedBy": {
+          "sys": {
+            "id": "57aJpJ3ZmXHa2ele71dqoM",
+            "type": "Link",
+            "linkType": "User"
+          }
+        },
+        "contentType": {
+          "sys": {
+            "id": "footer",
+            "type": "Link",
+            "linkType": "ContentType"
+          }
+        },
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        }
+      },
+      "controls": [
+        {
+          "fieldId": "footerTitle",
+          "widgetId": "singleLine",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "footerContent",
+          "widgetId": "richTextEditor",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "footerCopyright",
+          "widgetId": "singleLine",
+          "widgetNamespace": "builtin"
+        }
+      ]
+    },
+    {
+      "sys": {
+        "id": "default",
+        "type": "EditorInterface",
+        "space": {
+          "sys": {
+            "id": "kqxj525j4qxj",
+            "type": "Link",
+            "linkType": "Space"
+          }
+        },
+        "version": 6,
+        "createdAt": "2025-01-31T09:40:57.262Z",
+        "createdBy": {
+          "sys": {
+            "id": "57aJpJ3ZmXHa2ele71dqoM",
+            "type": "Link",
+            "linkType": "User"
+          }
+        },
+        "updatedAt": "2025-01-31T09:55:08.684Z",
+        "updatedBy": {
+          "sys": {
+            "id": "57aJpJ3ZmXHa2ele71dqoM",
+            "type": "Link",
+            "linkType": "User"
+          }
+        },
+        "contentType": {
+          "sys": {
+            "id": "mainNavigation",
+            "type": "Link",
+            "linkType": "ContentType"
+          }
+        },
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        }
+      },
+      "controls": [
+        {
+          "fieldId": "title",
+          "widgetId": "singleLine",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "menuItems",
+          "widgetId": "entryLinksEditor",
+          "widgetNamespace": "builtin"
+        }
+      ]
+    },
+    {
+      "sys": {
+        "id": "default",
+        "type": "EditorInterface",
+        "space": {
+          "sys": {
+            "id": "kqxj525j4qxj",
+            "type": "Link",
+            "linkType": "Space"
+          }
+        },
+        "version": 2,
+        "createdAt": "2025-01-31T09:42:39.225Z",
+        "createdBy": {
+          "sys": {
+            "id": "57aJpJ3ZmXHa2ele71dqoM",
+            "type": "Link",
+            "linkType": "User"
+          }
+        },
+        "updatedAt": "2025-01-31T09:42:39.641Z",
+        "updatedBy": {
+          "sys": {
+            "id": "57aJpJ3ZmXHa2ele71dqoM",
+            "type": "Link",
+            "linkType": "User"
+          }
+        },
+        "contentType": {
+          "sys": {
+            "id": "menuItem",
+            "type": "Link",
+            "linkType": "ContentType"
+          }
+        },
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        }
+      },
+      "controls": [
+        {
+          "fieldId": "title",
+          "widgetId": "singleLine",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "url",
+          "widgetId": "singleLine",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "order",
+          "widgetId": "numberEditor",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "isExternal",
+          "widgetId": "boolean",
+          "widgetNamespace": "builtin"
+        }
+      ]
+    }
+  ],
+  "entries": [
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "25pG76T9RY5hl1zXg6w7E",
+        "type": "Entry",
+        "createdAt": "2025-01-30T10:23:27.631Z",
+        "updatedAt": "2025-01-30T12:10:55.008Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 12,
+        "publishedAt": "2025-01-30T12:10:55.008Z",
+        "firstPublishedAt": "2025-01-30T10:30:53.648Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 3,
+        "version": 13,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "post"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/entries/25pG76T9RY5hl1zXg6w7E"
+      },
+      "fields": {
+        "title": {
+          "en-US": "Viinin ja ruoan yhdistämisen taito"
+        },
+        "slug": {
+          "en-US": "viinin-ja-ruoan-yhdistaemisen-taito"
+        },
+        "content": {
+          "en-US": {
+            "data": {
+            },
+            "content": [
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Perusperiaatteet",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "heading-2"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Viinin ja ruoan yhdistämisessä on muutamia perusperiaatteita:",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Kevyet ruoat sopivat kevyiden viinien kanssa",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Täyteläiset ruoat kaipaavat täyteläisiä viinejä",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Happamat ruoat sopivat hapokkaiden viinien kanssa",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Makeat ruoat tarvitsevat makeita viinejä",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  }
+                ],
+                "nodeType": "unordered-list"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Esimerkkejä hyvistä yhdistelmistä",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "heading-2"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Tässä muutamia klassisia yhdistelmiä:",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Chardonnay ja grillattu kana",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Cabernet Sauvignon ja pihvi",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Sauvignon Blanc ja vuohenjuusto",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Port ja sinihomejuusto",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  }
+                ],
+                "nodeType": "unordered-list"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Muista kuitenkin, että makuasiat ovat yksilöllisiä. Kokeile rohkeasti erilaisia yhdistelmiä ja löydä omat suosikkisi!",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          }
+        },
+        "excerpt": {
+          "en-US": "Viinin ja ruoan yhdistäminen on taito, joka voi merkittävästi parantaa ruokailukokemusta. Tässä artikkelissa käymme läpi perusperiaatteet ja annamme vinkkejä onnistuneisiin yhdistelmiin."
+        },
+        "coverImage": {
+          "en-US": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Asset",
+              "id": "3oacuZq36Y2E8tJLWAyg1m"
+            }
+          }
+        },
+        "date": {
+          "en-US": "2025-01-30T12:24+02:00"
+        },
+        "author": {
+          "en-US": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "4Muhp88VNxXWyieQQAFYXb"
+            }
+          }
+        },
+        "category": {
+          "en-US": [
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "3m5t4dUT09ARi6ns8bZDeI"
+              }
+            },
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "26wTs9qV1rGLIgvcNmUWBK"
+              }
+            },
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "JWZj1eXYqEANUwfF2KlEk"
+              }
+            },
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "6dr8sVVxpZ6ZkwTF9eHkvF"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "4Muhp88VNxXWyieQQAFYXb",
+        "type": "Entry",
+        "createdAt": "2025-01-30T10:24:43.638Z",
+        "updatedAt": "2025-01-31T13:15:40.950Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 6,
+        "publishedAt": "2025-01-31T13:15:40.950Z",
+        "firstPublishedAt": "2025-01-30T10:31:43.729Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 2,
+        "version": 7,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "author"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/entries/4Muhp88VNxXWyieQQAFYXb"
+      },
+      "fields": {
+        "name": {
+          "en-US": "Viiniveijari"
+        },
+        "bio": {
+          "en-US": "Viiniveijari on intohimoinen viiniharrastaja ja ruokakirjoittaja, joka on erikoistunut viinin ja ruoan yhdistämiseen."
+        },
+        "image": {
+          "en-US": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Asset",
+              "id": "64pIG6yEQc8K5hyVBE35Tb"
+            }
+          }
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "3DpNj3KXggK5o4r82fKEaL",
+        "type": "Entry",
+        "createdAt": "2025-01-30T10:34:16.464Z",
+        "updatedAt": "2025-01-30T12:10:32.929Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 9,
+        "publishedAt": "2025-01-30T12:10:32.929Z",
+        "firstPublishedAt": "2025-01-30T10:35:34.403Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 2,
+        "version": 10,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "post"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/entries/3DpNj3KXggK5o4r82fKEaL"
+      },
+      "fields": {
+        "title": {
+          "en-US": "Italian viinialueiden tutkiminen"
+        },
+        "slug": {
+          "en-US": "italian-viinialueiden-tutkiminen"
+        },
+        "content": {
+          "en-US": {
+            "data": {
+            },
+            "content": [
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Toscana",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "heading-2"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Toscana on ehkä Italian tunnetuin viinialue. Sen kuuluisimpia viinejä ovat:",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Chianti",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Brunello di Montalcino",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Vino Nobile di Montepulciano",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  }
+                ],
+                "nodeType": "unordered-list"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Toscanassa viljellään pääasiassa Sangiovese-rypälettä, joka antaa viineille niiden tyypillisen kirsikkaisen maun ja korkean hapokkuuden.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Piemonte",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "heading-2"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Piemonte on toinen Italian kuuluisista viinialueista. Sen tunnetuimpia viinejä ovat:",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Barolo",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Barbaresco",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Barbera",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  }
+                ],
+                "nodeType": "unordered-list"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Piemonten päärypäle on Nebbiolo, joka tuottaa täyteläisiä, tanniinisia punaviinejä.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Veneto",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "heading-2"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Veneton alue on tunnettu erityisesti:",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Proseccosta",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Soavesta",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Valpolicellasta",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  }
+                ],
+                "nodeType": "unordered-list"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Veneton viinit ovat monimuotoisia, aina kevyistä valkoviineistä täyteläisiin punaviineihin.Italian viinialueet tarjoavat loputtomasti tutkittavaa ja maisteltavaa. Kokeile rohkeasti erilaisia italialaisia viinejä ja löydä omat suosikkisi!",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          }
+        },
+        "excerpt": {
+          "en-US": "Italia on yksi maailman suurimmista viinintuottajamaista, ja sen viinialueet ovat monimuotoisia ja kiehtovia. Tässä artikkelissa teemme matkan Italian tärkeimpiin viinialueisiin."
+        },
+        "coverImage": {
+          "en-US": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Asset",
+              "id": "WnuiyF2Zc7EFnupfieVOL"
+            }
+          }
+        },
+        "date": {
+          "en-US": "2025-01-03T16:15+02:00"
+        },
+        "author": {
+          "en-US": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "4Muhp88VNxXWyieQQAFYXb"
+            }
+          }
+        },
+        "category": {
+          "en-US": [
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "6uk22k4lHOSoG3uzd7wHAx"
+              }
+            },
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "26wTs9qV1rGLIgvcNmUWBK"
+              }
+            },
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "JWZj1eXYqEANUwfF2KlEk"
+              }
+            },
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "6dr8sVVxpZ6ZkwTF9eHkvF"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "3iOg19ZPx93E5Sq8cRafRM",
+        "type": "Entry",
+        "createdAt": "2025-01-30T10:37:59.524Z",
+        "updatedAt": "2025-01-30T12:10:19.569Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 10,
+        "publishedAt": "2025-01-30T12:10:19.569Z",
+        "firstPublishedAt": "2025-01-30T10:39:20.103Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 2,
+        "version": 11,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "post"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/entries/3iOg19ZPx93E5Sq8cRafRM"
+      },
+      "fields": {
+        "title": {
+          "en-US": "Luonnonviinien nousu"
+        },
+        "slug": {
+          "en-US": "luonnonviinien-nousu"
+        },
+        "content": {
+          "en-US": {
+            "data": {
+            },
+            "content": [
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Mitä ovat luonnonviinit?",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "heading-2"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Luonnonviinit ovat viinejä, jotka on valmistettu mahdollisimman vähäisellä puuttumisella luonnolliseen käymisprosessiin. Tyypillisiä piirteitä luonnonviineille ovat:",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Ei lisättyjä hiivoja",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Ei lisättyjä sulfaatteja tai hyvin vähän",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Ei suodatusta tai kirkastusta",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Usein luomuviljellyt rypäleet",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  }
+                ],
+                "nodeType": "unordered-list"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Miksi luonnonviinit kiinnostavat?",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "heading-2"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Luonnonviinit kiinnostavat monia syistä:",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Ainutlaatuinen maku ja aromi",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Ympäristöystävällisyys",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Terveellisyys (vähemmän lisäaineita)",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Autenttisuus ja käsityöläisyys",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  }
+                ],
+                "nodeType": "unordered-list"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Luonnonviinien haasteet",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "heading-2"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Luonnonviineihin liittyy myös haasteita:",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Epävakaa laatu",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Lyhyempi säilyvyys",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Korkeampi hinta",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  }
+                ],
+                "nodeType": "unordered-list"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Luonnonviinit ovat kiehtova osa viinimaailmaa. Ne tarjoavat uudenlaisia makuelämyksiä ja haastavat perinteisen viininvalmistuksen käytäntöjä. Kokeile rohkeasti erilaisia luonnonviinejä ja muodosta oma mielipiteesi!",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          }
+        },
+        "excerpt": {
+          "en-US": "Luonnonviinit ovat nousseet viime vuosina suureen suosioon. Mutta mitä luonnonviinit oikeastaan ovat ja miksi ne kiinnostavat niin monia?"
+        },
+        "coverImage": {
+          "en-US": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Asset",
+              "id": "20rSiTJlzQgJN4APF6YdaB"
+            }
+          }
+        },
+        "date": {
+          "en-US": "2025-01-16T12:30+02:00"
+        },
+        "author": {
+          "en-US": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "4Muhp88VNxXWyieQQAFYXb"
+            }
+          }
+        },
+        "category": {
+          "en-US": [
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "26wTs9qV1rGLIgvcNmUWBK"
+              }
+            },
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "JWZj1eXYqEANUwfF2KlEk"
+              }
+            },
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "6dr8sVVxpZ6ZkwTF9eHkvF"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "1JXBcoeODBKqk7fRExL80z",
+        "type": "Entry",
+        "createdAt": "2025-01-30T10:40:06.392Z",
+        "updatedAt": "2025-01-30T12:09:58.113Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 9,
+        "publishedAt": "2025-01-30T12:09:58.113Z",
+        "firstPublishedAt": "2025-01-30T10:41:04.101Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 2,
+        "version": 10,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "post"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/entries/1JXBcoeODBKqk7fRExL80z"
+      },
+      "fields": {
+        "title": {
+          "en-US": "Samppanja: Kuplien takana"
+        },
+        "slug": {
+          "en-US": "samppanja-kuplien-takana"
+        },
+        "content": {
+          "en-US": {
+            "data": {
+            },
+            "content": [
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Samppanjan historia",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "heading-2"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Samppanjan juuret ulottuvat 1600-luvun Ranskaan. Legendan mukaan benediktiinimunkki Dom Pérignon 'keksi' samppanjan, vaikka todellisuudessa hän vain kehitti menetelmiä, joilla hallita kuohuviinin valmistusta.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Valmistusmenetelmä",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "heading-2"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Samppanjan valmistus on monimutkainen prosessi:",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Perusviinin valmistus",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Sekoittaminen (assemblage)",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Toinen käyminen pullossa",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Kypsytys hiivasakan päällä",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Riddling (remuage)",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Hiivasakan poisto (dégorgement)",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Dosage ja korkitus",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  }
+                ],
+                "nodeType": "ordered-list"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Samppanjan tyylit",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "heading-2"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Samppanjaa on eri tyylejä makeusasteen mukaan:",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Brut Nature (0-3 g/l sokeria)",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Extra Brut (0-6 g/l)",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Brut (0-12 g/l)",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Extra Dry (12-17 g/l)",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Sec (17-32 g/l)",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Demi-sec (32-50 g/l)",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  }
+                ],
+                "nodeType": "unordered-list"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Miksi samppanja on erityistä?",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "heading-2"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Samppanjan erityisyys perustuu moniin tekijöihin:",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Ainutlaatuinen terroir",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Tarkasti säädellyt valmistusmenetelmät",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Pitkä historia ja perinteet",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {
+                    },
+                    "content": [
+                      {
+                        "data": {
+                        },
+                        "content": [
+                          {
+                            "data": {
+                            },
+                            "marks": [
+                            ],
+                            "value": "Ylelliset mielikuvat ja markkinointi",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  }
+                ],
+                "nodeType": "unordered-list"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Samppanja on paljon muutakin kuin vain juhlajuoma. Se on monimutkaisen prosessin ja pitkän historian tulos, joka tarjoaa nautintoja kaikille aisteille. Nauti samppanjasta hyvässä seurassa ja arvosta sen ainutlaatuisuutta!",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          }
+        },
+        "excerpt": {
+          "en-US": "Samppanja on yksi maailman arvostetuimmista ja juhlavimmista juomista. Mutta mitä samppanjan valmistukseen oikeastaan kuuluu ja mikä tekee siitä niin erityistä?"
+        },
+        "coverImage": {
+          "en-US": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Asset",
+              "id": "4zRKRIOOVtqHtakxvgTxAh"
+            }
+          }
+        },
+        "date": {
+          "en-US": "2025-01-10T12:45+02:00"
+        },
+        "author": {
+          "en-US": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "4Muhp88VNxXWyieQQAFYXb"
+            }
+          }
+        },
+        "category": {
+          "en-US": [
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "6dr8sVVxpZ6ZkwTF9eHkvF"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "11k4bz9XbWACYfMuEIzh2u",
+        "type": "Entry",
+        "createdAt": "2025-01-30T10:41:28.934Z",
+        "updatedAt": "2025-01-31T12:36:17.752Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 22,
+        "publishedAt": "2025-01-31T12:36:17.752Z",
+        "firstPublishedAt": "2025-01-30T10:44:12.409Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 7,
+        "version": 23,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "post"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/entries/11k4bz9XbWACYfMuEIzh2u"
+      },
+      "fields": {
+        "title": {
+          "en-US": "Napa Valleyn piilotettuja helmiä etsimässä"
+        },
+        "slug": {
+          "en-US": "napa-valleyn-piilotettuja-helmiae-etsimaessae"
+        },
+        "hero": {
+          "en-US": true
+        },
+        "content": {
+          "en-US": {
+            "data": {
+            },
+            "content": [
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Napa Valley on tunnettu maailmanluokan viineistään ja ikonista viinitiloistaan, mutta alue kätkee myös pienempiä helmiä, jotka tarjoavat ainutlaatuisia ja intiimejä viinikokemuksia. Suurten nimien varjossa toimii intohimoisia viininvalmistajia, jotka keskittyvät laatuun ja terroirin ilmentämiseen. Näillä tiloilla vierailu tarjoaa mahdollisuuden tutustua viininvalmistusprosessiin läheltä ja nauttia maisemista ilman suuria turistimassoja.  ",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Yksi tällainen helmi on **Smith-Madrone Winery**, joka sijaitsee Spring Mountainin rinteillä ja tunnetaan erityisesti elegantista Rieslingistään ja täyteläisestä Cabernet Sauvignonistaan. **Tres Sabores** tarjoaa rauhallisen ja luonnonläheisen ympäristön, jossa heidän luomuviininsä kertovat alueen ainutlaatuisesta maaperästä. Pritchard Hillillä sijaitseva **Ovid Napa Valley** puolestaan valmistaa harvinaisia punaviinejä, jotka ovat arvostettuja niin keräilijöiden kuin viiniharrastajien keskuudessa.  ",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Näillä piilotetuilla helmillä on paljon tarjottavaa niille, jotka etsivät autenttisempaa viinikokemusta Napa Valleyssa. Pienet viinitilat eivät ainoastaan tuota huippulaatuisia viinejä, vaan ne tarjoavat myös lämpimän ja henkilökohtaisen tunnelman, jossa viinin ystävät voivat uppoutua alueen rikkaaseen viinikulttuuriin ja perinteisiin.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          }
+        },
+        "excerpt": {
+          "en-US": "Tutustu vähemmän tunnettuihin viinitiloihin, jotka tuottavat joitakin Kalifornian kuuluisimman viinialueen hienoimmista viineistä."
+        },
+        "coverImage": {
+          "en-US": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Asset",
+              "id": "ZxUGGlqoz6WNvUl9cfzhf"
+            }
+          }
+        },
+        "date": {
+          "en-US": "2025-01-30T15:30+02:00"
+        },
+        "author": {
+          "en-US": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "4Muhp88VNxXWyieQQAFYXb"
+            }
+          }
+        },
+        "category": {
+          "en-US": [
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "6uk22k4lHOSoG3uzd7wHAx"
+              }
+            },
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "26wTs9qV1rGLIgvcNmUWBK"
+              }
+            },
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "JWZj1eXYqEANUwfF2KlEk"
+              }
+            },
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "6dr8sVVxpZ6ZkwTF9eHkvF"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "6dr8sVVxpZ6ZkwTF9eHkvF",
+        "type": "Entry",
+        "createdAt": "2025-01-30T11:06:41.428Z",
+        "updatedAt": "2025-01-30T11:12:12.142Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 6,
+        "publishedAt": "2025-01-30T11:12:12.142Z",
+        "firstPublishedAt": "2025-01-30T11:06:46.299Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 3,
+        "version": 7,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "category"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/entries/6dr8sVVxpZ6ZkwTF9eHkvF"
+      },
+      "fields": {
+        "name": {
+          "en-US": "Kuohuviinit"
+        },
+        "slug": {
+          "en-US": "kuohuviinit"
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "3m5t4dUT09ARi6ns8bZDeI",
+        "type": "Entry",
+        "createdAt": "2025-01-30T11:07:00.615Z",
+        "updatedAt": "2025-01-30T12:20:26.954Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 5,
+        "publishedAt": "2025-01-30T12:20:26.954Z",
+        "firstPublishedAt": "2025-01-30T11:07:08.641Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 2,
+        "version": 6,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "category"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/entries/3m5t4dUT09ARi6ns8bZDeI"
+      },
+      "fields": {
+        "name": {
+          "en-US": "Ruoka ja juoma"
+        },
+        "slug": {
+          "en-US": "ruoka-ja-juoma"
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "6uk22k4lHOSoG3uzd7wHAx",
+        "type": "Entry",
+        "createdAt": "2025-01-30T11:07:16.819Z",
+        "updatedAt": "2025-01-30T11:13:53.407Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 4,
+        "publishedAt": "2025-01-30T11:13:53.407Z",
+        "firstPublishedAt": "2025-01-30T11:07:44.165Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 2,
+        "version": 5,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "category"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/entries/6uk22k4lHOSoG3uzd7wHAx"
+      },
+      "fields": {
+        "name": {
+          "en-US": "Matkustus"
+        },
+        "slug": {
+          "en-US": "matkustus"
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "26wTs9qV1rGLIgvcNmUWBK",
+        "type": "Entry",
+        "createdAt": "2025-01-30T11:07:52.874Z",
+        "updatedAt": "2025-01-30T11:12:39.884Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 4,
+        "publishedAt": "2025-01-30T11:12:39.884Z",
+        "firstPublishedAt": "2025-01-30T11:07:58.947Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 2,
+        "version": 5,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "category"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/entries/26wTs9qV1rGLIgvcNmUWBK"
+      },
+      "fields": {
+        "name": {
+          "en-US": "Punaviinit"
+        },
+        "slug": {
+          "en-US": "punaviinit"
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "JWZj1eXYqEANUwfF2KlEk",
+        "type": "Entry",
+        "createdAt": "2025-01-30T11:08:02.104Z",
+        "updatedAt": "2025-01-30T11:12:22.410Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 4,
+        "publishedAt": "2025-01-30T11:12:22.410Z",
+        "firstPublishedAt": "2025-01-30T11:08:06.854Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 2,
+        "version": 5,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "category"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/entries/JWZj1eXYqEANUwfF2KlEk"
+      },
+      "fields": {
+        "name": {
+          "en-US": "Valkoviinit"
+        },
+        "slug": {
+          "en-US": "valkoviinit"
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "5l37apsNqOVc4GjOuSiV0h",
+        "type": "Entry",
+        "createdAt": "2025-01-30T12:30:56.235Z",
+        "updatedAt": "2025-01-30T12:40:15.844Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 9,
+        "publishedAt": "2025-01-30T12:40:15.844Z",
+        "firstPublishedAt": "2025-01-30T12:32:53.469Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 3,
+        "version": 10,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "footer"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/entries/5l37apsNqOVc4GjOuSiV0h"
+      },
+      "fields": {
+        "footerTitle": {
+          "en-US": "Korkkikierre"
+        },
+        "footerContent": {
+          "en-US": {
+            "data": {
+            },
+            "content": [
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Tutkimme viinin maailmaa, yksi siemaus kerrallaan. ",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          }
+        },
+        "footerCopyright": {
+          "en-US": "© 2023 Korkkikierre. Kaikki oikeudet pidätetään."
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "6BqO5mN9ruGrUxL52ZXOSB",
+        "type": "Entry",
+        "createdAt": "2025-01-31T09:41:34.924Z",
+        "updatedAt": "2025-01-31T10:01:34.904Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 6,
+        "publishedAt": "2025-01-31T10:01:34.904Z",
+        "firstPublishedAt": "2025-01-31T09:41:52.754Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 3,
+        "version": 7,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "mainNavigation"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/entries/6BqO5mN9ruGrUxL52ZXOSB"
+      },
+      "fields": {
+        "title": {
+          "en-US": "Main menu"
+        },
+        "menuItems": {
+          "en-US": [
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "5rEcdoK1N53YemO5fhQZn7"
+              }
+            },
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "1veZhbZXUAi3McOYkdjRM5"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "5rEcdoK1N53YemO5fhQZn7",
+        "type": "Entry",
+        "createdAt": "2025-01-31T09:42:48.674Z",
+        "updatedAt": "2025-01-31T09:42:58.270Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 2,
+        "publishedAt": "2025-01-31T09:42:58.270Z",
+        "firstPublishedAt": "2025-01-31T09:42:58.270Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 1,
+        "version": 3,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "menuItem"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/entries/5rEcdoK1N53YemO5fhQZn7"
+      },
+      "fields": {
+        "title": {
+          "en-US": "Etusivu"
+        },
+        "url": {
+          "en-US": "/"
+        },
+        "order": {
+          "en-US": 1
+        },
+        "isExternal": {
+          "en-US": false
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "1veZhbZXUAi3McOYkdjRM5",
+        "type": "Entry",
+        "createdAt": "2025-01-31T10:00:59.158Z",
+        "updatedAt": "2025-01-31T10:01:11.868Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 4,
+        "publishedAt": "2025-01-31T10:01:11.868Z",
+        "firstPublishedAt": "2025-01-31T10:01:07.999Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 2,
+        "version": 5,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "menuItem"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/entries/1veZhbZXUAi3McOYkdjRM5"
+      },
+      "fields": {
+        "title": {
+          "en-US": "About"
+        },
+        "url": {
+          "en-US": "/about"
+        },
+        "order": {
+          "en-US": 2
+        },
+        "isExternal": {
+          "en-US": false
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "qQ5J2q3MIRzPvfdr66SxL",
+        "type": "Entry",
+        "createdAt": "2025-01-31T10:37:30.768Z",
+        "updatedAt": "2025-01-31T12:25:41.802Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 13,
+        "publishedAt": "2025-01-31T12:25:41.802Z",
+        "firstPublishedAt": "2025-01-31T10:38:17.536Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 4,
+        "version": 14,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "post"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/entries/qQ5J2q3MIRzPvfdr66SxL"
+      },
+      "fields": {
+        "title": {
+          "en-US": "Tietoa meistä"
+        },
+        "slug": {
+          "en-US": "about"
+        },
+        "content": {
+          "en-US": {
+            "data": {
+            },
+            "content": [
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Tervetuloa viiniblogiimme! Olemme intohimoisia viinin ystäviä, jotka haluavat jakaa rakkautemme viineihin, niiden historiaan, valmistusmenetelmiin ja tietenkin makuihin. Blogimme on suunnattu niin aloitteleville viininystäville kuin kokeneemmille harrastajille, jotka etsivät inspiraatiota ja uusia makuelämyksiä.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Kirjoitamme viiniarvosteluja, esittelemme eri viinialueita ympäri maailmaa ja annamme vinkkejä viinin valintaan sekä ruokasuosituksiin. Haluamme tehdä viinien maailmasta helposti lähestyttävän ja tarjota käytännönläheistä tietoa ilman turhaa hienostelua.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {
+                },
+                "content": [
+                  {
+                    "data": {
+                    },
+                    "marks": [
+                    ],
+                    "value": "Liity seuraamme matkalle viinien kiehtovaan maailmaan, jossa jokainen pullo kertoo oman tarinansa. Nauti, opi ja inspiroidu kanssamme!",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          }
+        },
+        "coverImage": {
+          "en-US": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Asset",
+              "id": "7gmnQED8aU5seKneYMq4wy"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "assets": [
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "3oacuZq36Y2E8tJLWAyg1m",
+        "type": "Asset",
+        "createdAt": "2025-01-30T10:23:51.423Z",
+        "updatedAt": "2025-01-30T10:32:01.577Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 5,
+        "publishedAt": "2025-01-30T10:32:01.577Z",
+        "firstPublishedAt": "2025-01-30T10:32:01.577Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 1,
+        "version": 6,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/assets/3oacuZq36Y2E8tJLWAyg1m"
+      },
+      "fields": {
+        "title": {
+          "en-US": "Viinin ja ruoan yhdistäminen"
+        },
+        "description": {
+          "en-US": ""
+        },
+        "file": {
+          "en-US": {
+            "url": "//images.ctfassets.net/kqxj525j4qxj/3oacuZq36Y2E8tJLWAyg1m/b6282fed4999304845a8664714871224/pexels-photo-5379876.jpeg",
+            "details": {
+              "size": 1729852,
+              "image": {
+                "width": 6016,
+                "height": 4016
+              }
+            },
+            "fileName": "pexels-photo-5379876.jpeg",
+            "contentType": "image/jpeg"
+          }
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "64pIG6yEQc8K5hyVBE35Tb",
+        "type": "Asset",
+        "createdAt": "2025-01-30T10:24:57.284Z",
+        "updatedAt": "2025-01-30T12:12:28.447Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 6,
+        "publishedAt": "2025-01-30T12:12:28.447Z",
+        "firstPublishedAt": "2025-01-30T12:12:28.447Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 1,
+        "version": 7,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/assets/64pIG6yEQc8K5hyVBE35Tb"
+      },
+      "fields": {
+        "title": {
+          "en-US": "Viiniveijari"
+        },
+        "description": {
+          "en-US": ""
+        },
+        "file": {
+          "en-US": {
+            "url": "//images.ctfassets.net/kqxj525j4qxj/64pIG6yEQc8K5hyVBE35Tb/cceb44a7a3c1f6ad95efeb2dfad503e1/pexels-kampus-7233022.jpg",
+            "details": {
+              "size": 1701765,
+              "image": {
+                "width": 3400,
+                "height": 3400
+              }
+            },
+            "fileName": "pexels-kampus-7233022.jpg",
+            "contentType": "image/jpeg"
+          }
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "WnuiyF2Zc7EFnupfieVOL",
+        "type": "Asset",
+        "createdAt": "2025-01-30T10:34:35.991Z",
+        "updatedAt": "2025-01-30T10:35:11.577Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 4,
+        "publishedAt": "2025-01-30T10:35:11.577Z",
+        "firstPublishedAt": "2025-01-30T10:35:11.577Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 1,
+        "version": 5,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/assets/WnuiyF2Zc7EFnupfieVOL"
+      },
+      "fields": {
+        "title": {
+          "en-US": "Luentosali"
+        },
+        "description": {
+          "en-US": ""
+        },
+        "file": {
+          "en-US": {
+            "url": "//images.ctfassets.net/kqxj525j4qxj/WnuiyF2Zc7EFnupfieVOL/e5855d2853f59e35bbe0cff2e8016550/pexels-photo-8810040.jpeg",
+            "details": {
+              "size": 2003705,
+              "image": {
+                "width": 3456,
+                "height": 5184
+              }
+            },
+            "fileName": "pexels-photo-8810040.jpeg",
+            "contentType": "image/jpeg"
+          }
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "20rSiTJlzQgJN4APF6YdaB",
+        "type": "Asset",
+        "createdAt": "2025-01-30T10:38:33.871Z",
+        "updatedAt": "2025-01-30T10:38:59.256Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 5,
+        "publishedAt": "2025-01-30T10:38:59.256Z",
+        "firstPublishedAt": "2025-01-30T10:38:59.256Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 1,
+        "version": 6,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/assets/20rSiTJlzQgJN4APF6YdaB"
+      },
+      "fields": {
+        "title": {
+          "en-US": "Viinipullo"
+        },
+        "description": {
+          "en-US": ""
+        },
+        "file": {
+          "en-US": {
+            "url": "//images.ctfassets.net/kqxj525j4qxj/20rSiTJlzQgJN4APF6YdaB/6512e10a5ad3a829cfc7ae8a6c7daa7d/pexels-photo-2912108.jpeg",
+            "details": {
+              "size": 2339132,
+              "image": {
+                "width": 5047,
+                "height": 8000
+              }
+            },
+            "fileName": "pexels-photo-2912108.jpeg",
+            "contentType": "image/jpeg"
+          }
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "4zRKRIOOVtqHtakxvgTxAh",
+        "type": "Asset",
+        "createdAt": "2025-01-30T10:40:29.905Z",
+        "updatedAt": "2025-01-30T10:40:50.048Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 4,
+        "publishedAt": "2025-01-30T10:40:50.048Z",
+        "firstPublishedAt": "2025-01-30T10:40:50.048Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 1,
+        "version": 5,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/assets/4zRKRIOOVtqHtakxvgTxAh"
+      },
+      "fields": {
+        "title": {
+          "en-US": "Silta"
+        },
+        "description": {
+          "en-US": ""
+        },
+        "file": {
+          "en-US": {
+            "url": "//images.ctfassets.net/kqxj525j4qxj/4zRKRIOOVtqHtakxvgTxAh/61b46ead107373429b074f0bda146a67/pexels-photo-5980651.jpeg",
+            "details": {
+              "size": 1318299,
+              "image": {
+                "width": 4208,
+                "height": 3120
+              }
+            },
+            "fileName": "pexels-photo-5980651.jpeg",
+            "contentType": "image/jpeg"
+          }
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "ZxUGGlqoz6WNvUl9cfzhf",
+        "type": "Asset",
+        "createdAt": "2025-01-30T10:41:51.728Z",
+        "updatedAt": "2025-01-30T10:42:20.589Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 5,
+        "publishedAt": "2025-01-30T10:42:20.589Z",
+        "firstPublishedAt": "2025-01-30T10:42:20.589Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 1,
+        "version": 6,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/assets/ZxUGGlqoz6WNvUl9cfzhf"
+      },
+      "fields": {
+        "title": {
+          "en-US": "Viiniköynnöksiä"
+        },
+        "description": {
+          "en-US": ""
+        },
+        "file": {
+          "en-US": {
+            "url": "//images.ctfassets.net/kqxj525j4qxj/ZxUGGlqoz6WNvUl9cfzhf/5f2c788a113acfb429ef3c69adeb3b93/pexels-photo-442116.jpeg",
+            "details": {
+              "size": 4306397,
+              "image": {
+                "width": 6000,
+                "height": 4000
+              }
+            },
+            "fileName": "pexels-photo-442116.jpeg",
+            "contentType": "image/jpeg"
+          }
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "id": "7gmnQED8aU5seKneYMq4wy",
+        "type": "Asset",
+        "createdAt": "2025-01-31T10:27:08.512Z",
+        "updatedAt": "2025-01-31T10:27:26.864Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 4,
+        "publishedAt": "2025-01-31T10:27:26.864Z",
+        "firstPublishedAt": "2025-01-31T10:27:26.864Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "publishedCounter": 1,
+        "version": 5,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/kqxj525j4qxj/environments/master/assets/7gmnQED8aU5seKneYMq4wy"
+      },
+      "fields": {
+        "title": {
+          "en-US": "Viinilasit"
+        },
+        "description": {
+          "en-US": ""
+        },
+        "file": {
+          "en-US": {
+            "url": "//images.ctfassets.net/kqxj525j4qxj/7gmnQED8aU5seKneYMq4wy/366012727677306eb7fe9bb68e005100/pexels-photo-1123260.jpeg",
+            "details": {
+              "size": 1774700,
+              "image": {
+                "width": 6000,
+                "height": 4000
+              }
+            },
+            "fileName": "pexels-photo-1123260.jpeg",
+            "contentType": "image/jpeg"
+          }
+        }
+      }
+    }
+  ],
+  "locales": [
+    {
+      "name": "English (United States)",
+      "code": "en-US",
+      "fallbackCode": null,
+      "default": true,
+      "contentManagementApi": true,
+      "contentDeliveryApi": true,
+      "optional": false,
+      "sys": {
+        "type": "Locale",
+        "id": "0JkGSEb5m6N8fsPWMDbf3e",
+        "version": 1,
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "environment": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Environment",
+            "id": "master",
+            "uuid": "9f4d2951-2644-4e48-a44d-ac9357ddc6a9"
+          }
+        },
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "createdAt": "2025-01-15T14:44:05Z",
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedAt": "2025-01-15T14:44:05Z"
+      }
+    }
+  ],
+  "webhooks": [
+  ],
+  "roles": [
+    {
+      "name": "Editor",
+      "description": "Allows editing, publishing and archiving of content",
+      "policies": [
+        {
+          "effect": "allow",
+          "actions": "all",
+          "constraint": {
+            "and": [
+              {
+                "equals": [
+                  {
+                    "doc": "sys.type"
+                  },
+                  "Entry"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "effect": "allow",
+          "actions": "all",
+          "constraint": {
+            "and": [
+              {
+                "equals": [
+                  {
+                    "doc": "sys.type"
+                  },
+                  "Asset"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "permissions": {
+        "ContentModel": [
+          "read"
+        ],
+        "Settings": [
+        ],
+        "ContentDelivery": [
+        ],
+        "Environments": [
+        ],
+        "EnvironmentAliases": [
+        ],
+        "Tags": [
+        ]
+      },
+      "sys": {
+        "type": "Role",
+        "id": "0JGnl19ZxmMAEPzvVJyWm0",
+        "version": 0,
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kqxj525j4qxj"
+          }
+        },
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "createdAt": "2025-01-15T14:44:06Z",
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "57aJpJ3ZmXHa2ele71dqoM"
+          }
+        },
+        "updatedAt": "2025-01-15T14:44:06Z"
+      }
+    }
+  ]
+}

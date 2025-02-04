@@ -1,16 +1,87 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { contentfulClient } from './client';
+import { Entry } from 'contentful';
 import {
-  CategoryEntrySkeleton,
-  FooterEntrySkeleton,
-  MainNavigationEntrySkeleton,
-  PostEntrySkeleton,
-  Category,
-  Footer,
-  MenuItem,
-  Post,
-  PostsResponse,
-} from './types';
+  TypeCategorySkeleton,
+  TypeFooterSkeleton,
+  TypeMainNavigationSkeleton,
+  TypePostSkeleton,
+} from './types/';
+
+/**
+ * Represents an image asset from Contentful
+ * Contains metadata and file information
+ */
+export interface Image {
+  fields: {
+    title: string;
+    file: {
+      fileName: string;
+      contentType: string;
+      details: {
+        image: {
+          width: number;
+          height: number;
+        };
+        size: number;
+      };
+      url: string;
+    };
+    description: string;
+  };
+}
+
+/**
+ * Represents an author with their profile information
+ * Contains optional bio and profile image
+ */
+export interface Author {
+  fields: {
+    name: string;
+    bio?: string;
+    image?: Image;
+  };
+}
+
+/**
+ * Represents a navigation menu item
+ * Used for building site navigation structure
+ */
+export interface MenuItem {
+  fields: {
+    title?: string;
+    url?: string;
+    order?: number;
+    isExternal?: boolean;
+  };
+}
+
+/**
+ * Maps Contentful post entry fields to a normalized post object
+ * Handles nested author data and ensures image URLs are absolute
+ * @param item - Raw Contentful post entry
+ * @returns Normalized post object with processed fields
+ */
+function mapPostFields(item: Entry<TypePostSkeleton>) {
+  return {
+    title: item.fields.title,
+    slug: item.fields.slug,
+    excerpt: item.fields.excerpt,
+    content: item.fields?.content,
+    image: ensureAbsoluteUrl(
+      (item.fields.coverImage as Image).fields.file?.url
+    ),
+    date: item.fields?.date,
+    author: (item.fields?.author as unknown as Author)?.fields && {
+      name: (item.fields?.author as unknown as Author)?.fields.name,
+      bio: (item.fields?.author as unknown as Author)?.fields.bio,
+      image: ensureAbsoluteUrl(
+        (item.fields?.author as unknown as Author)?.fields.image?.fields?.file
+          ?.url
+      ),
+    },
+  };
+}
 
 /**
  * Ensures URLs are absolute by prepending https: if needed
@@ -30,9 +101,9 @@ export const contentfulQueries = {
    * @param page - Page number for pagination
    * @param limit - Number of posts per page
    */
-  getAllPosts: async (page = 1, limit = 10): Promise<PostsResponse> => {
+  getAllPosts: async (page = 1, limit = 10) => {
     const skip = (page - 1) * limit;
-    const response = await contentfulClient.getEntries<PostEntrySkeleton>({
+    const response = await contentfulClient.getEntries<TypePostSkeleton>({
       content_type: 'post',
       limit,
       skip,
@@ -40,21 +111,7 @@ export const contentfulQueries = {
     });
 
     return {
-      posts: response.items.map((item) => ({
-        title: item.fields.title,
-        slug: item.fields.slug,
-        excerpt: item.fields.excerpt,
-        content: item.fields?.content,
-        image: ensureAbsoluteUrl(item.fields?.coverImage?.fields?.file?.url),
-        date: item.fields?.date,
-        author: item.fields?.author?.fields && {
-          name: item.fields.author.fields.name,
-          bio: item.fields.author.fields.bio,
-          image: ensureAbsoluteUrl(
-            item.fields.author.fields.image?.fields?.file?.url
-          ),
-        },
-      })),
+      posts: response.items.map(mapPostFields),
       total: response.total,
       currentPage: page,
       totalPages: Math.ceil(response.total / limit),
@@ -67,7 +124,7 @@ export const contentfulQueries = {
    * @param limit - Number of random posts to return
    */
   getRandomPosts: async (limit = 3) => {
-    const entries = await contentfulClient.getEntries<PostEntrySkeleton>({
+    const entries = await contentfulClient.getEntries<TypePostSkeleton>({
       content_type: 'post',
       limit: 100, // Fetch more to randomize from
       select: ['fields.title', 'fields.slug', 'fields.coverImage'],
@@ -79,7 +136,9 @@ export const contentfulQueries = {
     return shuffled.slice(0, limit).map((entry) => ({
       title: entry.fields.title as string,
       slug: entry.fields.slug as string,
-      image: ensureAbsoluteUrl(entry.fields?.coverImage?.fields?.file?.url),
+      image: ensureAbsoluteUrl(
+        (entry.fields?.coverImage as Image)?.fields?.file?.url
+      ),
     }));
   },
 
@@ -88,9 +147,9 @@ export const contentfulQueries = {
    * Includes nested references up to 2 levels deep
    * @param slug - URL slug of the post
    */
-  getPostBySlug: async (slug: string): Promise<Post | null> => {
+  getPostBySlug: async (slug: string) => {
     try {
-      const response = await contentfulClient.getEntries<PostEntrySkeleton>({
+      const response = await contentfulClient.getEntries<TypePostSkeleton>({
         content_type: 'post',
         'fields.slug[in]': [slug], // Use an array for safety
         limit: 1,
@@ -101,21 +160,7 @@ export const contentfulQueries = {
 
       const item = response.items[0];
 
-      return {
-        title: item.fields.title,
-        slug: item.fields.slug,
-        excerpt: item.fields.excerpt,
-        content: item.fields?.content,
-        image: ensureAbsoluteUrl(item.fields?.coverImage?.fields?.file?.url),
-        date: item.fields?.date,
-        author: item.fields?.author?.fields && {
-          name: item.fields.author.fields.name,
-          bio: item.fields.author.fields.bio,
-          image: ensureAbsoluteUrl(
-            item.fields.author.fields.image?.fields?.file?.url
-          ),
-        },
-      };
+      return mapPostFields(item);
     } catch {
       return null;
     }
@@ -125,9 +170,9 @@ export const contentfulQueries = {
    * Retrieves the featured hero post marked with hero flag
    * Returns full post data including author information
    */
-  getHeroPost: async (): Promise<Post | null> => {
+  getHeroPost: async () => {
     try {
-      const response = await contentfulClient.getEntries<PostEntrySkeleton>({
+      const response = await contentfulClient.getEntries<TypePostSkeleton>({
         content_type: 'post',
         'fields.hero': true,
         limit: 1,
@@ -137,21 +182,7 @@ export const contentfulQueries = {
 
       const item = response.items[0];
 
-      return {
-        title: item.fields.title,
-        slug: item.fields.slug,
-        excerpt: item.fields.excerpt,
-        content: item.fields?.content,
-        image: ensureAbsoluteUrl(item.fields?.coverImage?.fields?.file?.url),
-        date: item.fields?.date,
-        author: item.fields?.author?.fields && {
-          name: item.fields.author.fields.name,
-          bio: item.fields.author.fields.bio,
-          image: ensureAbsoluteUrl(
-            item.fields.author.fields.image?.fields?.file?.url
-          ),
-        },
-      };
+      return mapPostFields(item);
     } catch {
       return null;
     }
@@ -161,8 +192,8 @@ export const contentfulQueries = {
    * Fetches all available categories
    * Orders by creation date
    */
-  getCategories: async (): Promise<Category[]> => {
-    const response = await contentfulClient.getEntries<CategoryEntrySkeleton>({
+  getCategories: async () => {
+    const response = await contentfulClient.getEntries<TypeCategorySkeleton>({
       content_type: 'category',
       order: ['sys.createdAt'],
     });
@@ -178,9 +209,9 @@ export const contentfulQueries = {
    * First finds category by slug, then finds all linked posts
    * @param categorySlug - URL slug of the category
    */
-  getPostsByCategory: async (categorySlug: string): Promise<Post[]> => {
+  getPostsByCategory: async (categorySlug: string) => {
     const categoryResponse =
-      await contentfulClient.getEntries<CategoryEntrySkeleton>({
+      await contentfulClient.getEntries<TypeCategorySkeleton>({
         content_type: 'category',
         'fields.slug': categorySlug,
         limit: 1,
@@ -188,40 +219,26 @@ export const contentfulQueries = {
 
     if (!categoryResponse.items.length) return [];
 
-    const response = await contentfulClient.getEntries<PostEntrySkeleton>({
+    const response = await contentfulClient.getEntries<TypePostSkeleton>({
       content_type: 'post',
       links_to_entry: categoryResponse.items[0].sys.id,
       order: ['-sys.createdAt'],
       include: 2,
     });
 
-    return response.items.map((item) => ({
-      title: item.fields.title,
-      slug: item.fields.slug,
-      excerpt: item.fields?.excerpt,
-      content: item.fields?.content,
-      image: ensureAbsoluteUrl(item.fields?.coverImage?.fields?.file?.url),
-      date: item.fields?.date,
-      author: item.fields?.author?.fields && {
-        name: item.fields.author.fields.name,
-        bio: item.fields.author.fields.bio,
-        image: ensureAbsoluteUrl(
-          item.fields.author.fields.image?.fields?.file?.url
-        ),
-      },
-    }));
+    return response.items.map(mapPostFields);
   },
 
   /**
    * Fetches main navigation menu items
    * Falls back to default home menu if no custom menu is defined
    */
-  getMainNavigation: async (): Promise<MenuItem[]> => {
-    const defaultMenu: MenuItem[] = [{ title: 'Etusivu', url: '/' }];
+  getMainNavigation: async () => {
+    const defaultMenu = [{ title: 'Etusivu', url: '/' }];
 
     try {
       const response =
-        await contentfulClient.getEntries<MainNavigationEntrySkeleton>({
+        await contentfulClient.getEntries<TypeMainNavigationSkeleton>({
           content_type: 'mainNavigation',
           'fields.title': 'Main menu',
           limit: 1,
@@ -231,13 +248,9 @@ export const contentfulQueries = {
         return defaultMenu;
       }
 
-      return (
-        response.items[0].fields.menuItems as Array<{
-          fields: { title: string; url: string };
-        }>
-      ).map((item) => ({
-        title: item.fields.title,
-        url: item.fields.url,
+      return response.items[0].fields.menuItems.map((item) => ({
+        title: (item as MenuItem).fields.title,
+        url: (item as MenuItem).fields.url,
       }));
     } catch {
       return defaultMenu;
@@ -248,13 +261,13 @@ export const contentfulQueries = {
    * Retrieves footer content with fallback to default values
    * Transforms rich text content to React components
    */
-  getFooter: async (): Promise<Footer> => {
-    const response = await contentfulClient.getEntries<FooterEntrySkeleton>({
+  getFooter: async () => {
+    const response = await contentfulClient.getEntries<TypeFooterSkeleton>({
       content_type: 'footer',
       limit: 1,
     });
 
-    const defaultFooter: Footer = {
+    const defaultFooter = {
       footerTitle: 'Korkkikierre',
       footerContent: 'Tutkimme viinin maailmaa, yksi siemaus kerrallaan.',
       footerCopyright: '© 2024 Korkkikierre. Kaikki oikeudet pidätetään.',

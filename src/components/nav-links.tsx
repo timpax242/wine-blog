@@ -13,8 +13,8 @@ interface NavLinksProps {
 export default function NavLinks({ items, className }: NavLinksProps) {
   return (
     <ul className={className}>
-      {items.map((item) => (
-        <li key={item.url}>
+      {items.map((item, index) => (
+        <li key={`${item.url}-${index}`}>
           {/* Navigation link with hover effect */}
           <Link
             href={item.url}
