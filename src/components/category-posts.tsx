@@ -25,7 +25,7 @@ export default async function CategoryPosts({
           className="bg-white overflow-hidden rounded shadow-sm transition-shadow hover:shadow-md"
         >
           {/* Post preview card with image and excerpt */}
-          <Link href={`/blog/${post.slug}`}>
+          <Link href={`/${post.slug}`}>
             <div className="relative h-64 w-full">
               <Image
                 src={post.image || '/placeholder.svg'}
