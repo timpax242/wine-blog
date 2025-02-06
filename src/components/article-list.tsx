@@ -23,8 +23,8 @@ export default async function ArticleList() {
               {/* Article featured image */}
               <div className="relative h-64 w-full">
                 <Image
-                  src={article.image || '/placeholder.svg'}
-                  alt={article.title}
+                  src={article.imageUrl}
+                  alt={article.imageTitle || article.title}
                   fill
                   className="object-cover"
                 />

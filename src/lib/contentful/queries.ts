@@ -36,15 +36,21 @@ export const contentfulQueries = {
     });
 
     const posts = response.items.map((item) => {
+      let imageUrl: string = '';
+      let imageTitle: string = '';
+
+      if (item.fields.coverImage && 'fields' in item.fields.coverImage) {
+        imageUrl = ensureAbsoluteUrl(item.fields.coverImage.fields.file?.url);
+        imageTitle = item.fields.coverImage.fields.title || '';
+      }
+
       return {
         title: item.fields.title,
         slug: item.fields.slug,
         excerpt: item.fields.excerpt,
         content: item.fields?.content,
-        image:
-          item.fields.coverImage && 'fields' in item.fields.coverImage
-            ? ensureAbsoluteUrl(item.fields.coverImage.fields.file?.url)
-            : undefined,
+        imageUrl: imageUrl,
+        imageTitle: imageTitle,
         date: item.fields?.date,
         author:
           item.fields.author && 'fields' in item.fields.author
@@ -87,14 +93,24 @@ export const contentfulQueries = {
     // Shuffle and take first 3
     const shuffled = response.items.sort(() => 0.5 - Math.random());
 
-    return shuffled.slice(0, limit).map((item) => ({
-      title: item.fields.title,
-      slug: item.fields.slug,
-      image:
-        item.fields.coverImage && 'fields' in item.fields.coverImage
-          ? ensureAbsoluteUrl(item.fields.coverImage.fields.file?.url)
-          : undefined,
-    }));
+    const posts = shuffled.slice(0, limit).map((item) => {
+      let imageUrl: string = '';
+      let imageTitle: string = '';
+
+      if (item.fields.coverImage && 'fields' in item.fields.coverImage) {
+        imageUrl = ensureAbsoluteUrl(item.fields.coverImage.fields.file?.url);
+        imageTitle = item.fields.coverImage.fields.title || '';
+      }
+
+      return {
+        title: item.fields.title,
+        slug: item.fields.slug,
+        imageUrl: imageUrl,
+        imageTitle: imageTitle,
+      };
+    });
+
+    return posts;
   },
 
   /**
@@ -114,15 +130,22 @@ export const contentfulQueries = {
       if (!response.items.length) return null;
 
       const item = response.items[0];
+
+      let imageUrl: string = '';
+      let imageTitle: string = '';
+
+      if (item.fields.coverImage && 'fields' in item.fields.coverImage) {
+        imageUrl = ensureAbsoluteUrl(item.fields.coverImage.fields.file?.url);
+        imageTitle = item.fields.coverImage.fields.title || '';
+      }
+
       return {
         title: item.fields.title,
         slug: item.fields.slug,
         excerpt: item.fields.excerpt,
         content: item.fields.content,
-        image:
-          item.fields.coverImage && 'fields' in item.fields.coverImage
-            ? ensureAbsoluteUrl(item.fields.coverImage.fields.file?.url)
-            : undefined,
+        imageUrl: imageUrl,
+        imageTitle: imageTitle,
         date: item.fields?.date,
         author:
           item.fields.author && 'fields' in item.fields.author
@@ -160,15 +183,22 @@ export const contentfulQueries = {
       if (!response.items.length) return null;
 
       const item = response.items[0];
+
+      let imageUrl: string = '';
+      let imageTitle: string = '';
+
+      if (item.fields.coverImage && 'fields' in item.fields.coverImage) {
+        imageUrl = ensureAbsoluteUrl(item.fields.coverImage.fields.file?.url);
+        imageTitle = item.fields.coverImage.fields.title || '';
+      }
+
       return {
         title: item.fields.title,
         slug: item.fields.slug,
         excerpt: item.fields.excerpt,
         content: item.fields.content,
-        image:
-          item.fields.coverImage && 'fields' in item.fields.coverImage
-            ? ensureAbsoluteUrl(item.fields.coverImage.fields.file?.url)
-            : undefined,
+        imageUrl: imageUrl,
+        imageTitle: imageTitle,
         date: item.fields?.date,
         author:
           item.fields.author && 'fields' in item.fields.author

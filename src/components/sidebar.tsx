@@ -36,8 +36,8 @@ export default async function Sidebar() {
             <li key={post.slug} className="flex items-center space-x-4">
               <div className="relative w-1/4 h-16 overflow-hidden rounded">
                 <Image
-                  src={post.image || '/placeholder.svg'}
-                  alt={post.title}
+                  src={post.imageUrl}
+                  alt={post.imageTitle || post.title}
                   fill
                   className="object-cover"
                 />

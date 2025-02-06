@@ -6,7 +6,8 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 interface BlogPostProps {
   title: string;
   content: Document; // Using Contentful's Document type
-  image: string | undefined;
+  imageUrl: string;
+  imageTitle: string;
   date: string | undefined;
   excerpt: string | undefined;
   author?: {
@@ -19,7 +20,8 @@ interface BlogPostProps {
 export default function BlogPost({
   title,
   content,
-  image,
+  imageUrl,
+  imageTitle,
   date,
   excerpt,
   author,
@@ -39,8 +41,8 @@ export default function BlogPost({
         {/* Hero image */}
         <div className="relative h-64 sm:h-96 w-full mb-8">
           <Image
-            src={image || '/placeholder.svg'}
-            alt={title}
+            src={imageUrl}
+            alt={imageTitle || title}
             fill
             className="object-cover rounded-md"
             priority // Load with high priority as it's above the fold

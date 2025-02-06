@@ -13,8 +13,8 @@ export default async function Hero() {
     <section className="relative h-[60vh] w-full mb-12">
       {/* Full-width background image */}
       <Image
-        src={latestHeroPost.image || '/placeholder.svg'}
-        alt={latestHeroPost.title}
+        src={latestHeroPost.imageUrl}
+        alt={latestHeroPost.imageTitle || latestHeroPost.title}
         fill
         className="object-cover"
         priority // Prioritize loading as this is above the fold
