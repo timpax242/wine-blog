@@ -23,9 +23,10 @@ export default function MobileMenu({ items }: MobileMenuProps) {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="text-white focus:outline-none"
+        aria-label="Open/close main menu"
       >
         {isOpen ? <X size={24} /> : <Menu size={24} />}
-        <span className="hidden">Open/Close main menu</span>
+        <span className="sr-only">Open/close main menu</span>
       </button>
 
       {/* Dropdown menu - only rendered when isOpen is true */}
