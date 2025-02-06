@@ -25,6 +25,7 @@ export default function MobileMenu({ items }: MobileMenuProps) {
         className="text-white focus:outline-none"
       >
         {isOpen ? <X size={24} /> : <Menu size={24} />}
+        <span className="hidden">Open/Close main menu</span>
       </button>
 
       {/* Dropdown menu - only rendered when isOpen is true */}
