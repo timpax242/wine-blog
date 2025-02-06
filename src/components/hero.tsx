@@ -10,7 +10,7 @@ export default async function Hero() {
   if (!latestHeroPost) return null;
 
   return (
-    <section className="relative h-[70vh] w-full mb-12">
+    <section className="relative h-[60vh] w-full mb-12">
       {/* Full-width background image */}
       <Image
         src={latestHeroPost.image || '/placeholder.svg'}
