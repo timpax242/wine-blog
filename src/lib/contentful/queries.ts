@@ -5,7 +5,9 @@ import {
   TypeFooterSkeleton,
   TypeMainNavigationSkeleton,
   TypePostSkeleton,
+  TypeAuthorSkeleton,
 } from './types/';
+import { Asset, Entry } from 'contentful';
 
 /**
  * Ensures URLs are absolute by prepending https: if needed
@@ -14,6 +16,37 @@ import {
 const ensureAbsoluteUrl = (url?: string): string => {
   if (!url) return '/placeholder.svg';
   return url.startsWith('//') ? `https:${url}` : url;
+};
+
+/**
+ * Extracts image URL and title from Contentful image field
+ */
+const extractImageData = (imageField?: Asset) => {
+  if (imageField && 'fields' in imageField) {
+    return {
+      imageUrl: ensureAbsoluteUrl(imageField.fields.file?.url as string),
+      imageTitle: imageField.fields.title as string,
+    };
+  } else {
+    return { imageUrl: '', imageTitle: '' };
+  }
+};
+
+/**
+ * Extracts author data from Contentful author field
+ */
+const extractAuthorData = (
+  authorField?: Entry<TypeAuthorSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', string>
+) => {
+  if (authorField && 'fields' in authorField) {
+    return {
+      name: authorField.fields.name,
+      bio: authorField.fields.bio,
+      ...extractImageData(authorField.fields.image),
+    };
+  } else {
+    return undefined;
+  }
 };
 
 /**
@@ -26,91 +59,80 @@ export const contentfulQueries = {
    * @param limit - Number of posts per page
    */
   getAllPosts: async (page = 1, limit = 10) => {
-    const skip = (page - 1) * limit;
-    const response = await contentfulClient.getEntries<TypePostSkeleton>({
-      content_type: 'post',
-      limit,
-      skip,
-      order: ['-sys.createdAt'],
-      include: 2,
-    });
+    try {
+      const skip = (page - 1) * limit;
+      const response =
+        await contentfulClient.withoutUnresolvableLinks.getEntries<TypePostSkeleton>(
+          {
+            content_type: 'post',
+            limit,
+            skip,
+            order: ['-sys.createdAt'],
+            include: 2,
+          }
+        );
 
-    const posts = response.items.map((item) => {
-      let imageUrl: string = '';
-      let imageTitle: string = '';
-
-      if (item.fields.coverImage && 'fields' in item.fields.coverImage) {
-        imageUrl = ensureAbsoluteUrl(item.fields.coverImage.fields.file?.url);
-        imageTitle = item.fields.coverImage.fields.title || '';
-      }
+      const posts = response.items.map((item) => {
+        return {
+          title: item.fields.title,
+          slug: item.fields.slug,
+          excerpt: item.fields.excerpt,
+          content: item.fields?.content,
+          ...extractImageData(item.fields.coverImage),
+          date: item.fields?.date,
+          author: extractAuthorData(item.fields.author),
+        };
+      });
 
       return {
-        title: item.fields.title,
-        slug: item.fields.slug,
-        excerpt: item.fields.excerpt,
-        content: item.fields?.content,
-        imageUrl: imageUrl,
-        imageTitle: imageTitle,
-        date: item.fields?.date,
-        author:
-          item.fields.author && 'fields' in item.fields.author
-            ? {
-                name: item.fields.author.fields.name,
-                bio: item.fields.author.fields.bio,
-                image:
-                  item.fields.author.fields.image &&
-                  'fields' in item.fields.author.fields.image
-                    ? ensureAbsoluteUrl(
-                        item.fields.author.fields.image.fields.file?.url
-                      )
-                    : undefined,
-              }
-            : undefined,
+        posts: posts,
+        total: response.total,
+        currentPage: page,
+        totalPages: Math.ceil(response.total / limit),
       };
-    });
-
-    return {
-      posts: posts,
-      total: response.total,
-      currentPage: page,
-      totalPages: Math.ceil(response.total / limit),
-    };
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+      return {
+        posts: [],
+        total: 0,
+        currentPage: page,
+        totalPages: 0,
+      };
+    }
   },
-
   /**
    * Retrieves random posts for features like "Related Posts"
    * Only fetches minimal fields for performance
    * @param limit - Number of random posts to return
    */
   getRandomPosts: async (limit = 3) => {
-    const response = await contentfulClient.getEntries<TypePostSkeleton>({
-      content_type: 'post',
-      limit: 100, // Fetch more to randomize from
-      select: ['fields.title', 'fields.slug', 'fields.coverImage'],
-      include: 2,
-    });
+    try {
+      const response =
+        await contentfulClient.withoutUnresolvableLinks.getEntries<TypePostSkeleton>(
+          {
+            content_type: 'post',
+            limit: 100, // Fetch more to randomize from
+            select: ['fields.title', 'fields.slug', 'fields.coverImage'],
+            include: 2,
+          }
+        );
 
-    // Shuffle and take first 3
-    const shuffled = response.items.sort(() => 0.5 - Math.random());
+      // Shuffle and take first 3
+      const shuffled = response.items.sort(() => 0.5 - Math.random());
 
-    const posts = shuffled.slice(0, limit).map((item) => {
-      let imageUrl: string = '';
-      let imageTitle: string = '';
+      const posts = shuffled.slice(0, limit).map((item) => {
+        return {
+          title: item.fields.title,
+          slug: item.fields.slug,
+          ...extractImageData(item.fields.coverImage),
+        };
+      });
 
-      if (item.fields.coverImage && 'fields' in item.fields.coverImage) {
-        imageUrl = ensureAbsoluteUrl(item.fields.coverImage.fields.file?.url);
-        imageTitle = item.fields.coverImage.fields.title || '';
-      }
-
-      return {
-        title: item.fields.title,
-        slug: item.fields.slug,
-        imageUrl: imageUrl,
-        imageTitle: imageTitle,
-      };
-    });
-
-    return posts;
+      return posts;
+    } catch (error) {
+      console.error('Error fetching random posts:', error);
+      return [];
+    }
   },
 
   /**
@@ -120,49 +142,31 @@ export const contentfulQueries = {
    */
   getPostBySlug: async (slug: string) => {
     try {
-      const response = await contentfulClient.getEntries<TypePostSkeleton>({
-        content_type: 'post',
-        'fields.slug[in]': [slug],
-        limit: 1,
-        include: 2,
-      });
+      const response =
+        await contentfulClient.withoutUnresolvableLinks.getEntries<TypePostSkeleton>(
+          {
+            content_type: 'post',
+            'fields.slug[in]': [slug],
+            limit: 1,
+            include: 2,
+          }
+        );
 
       if (!response.items.length) return null;
 
       const item = response.items[0];
-
-      let imageUrl: string = '';
-      let imageTitle: string = '';
-
-      if (item.fields.coverImage && 'fields' in item.fields.coverImage) {
-        imageUrl = ensureAbsoluteUrl(item.fields.coverImage.fields.file?.url);
-        imageTitle = item.fields.coverImage.fields.title || '';
-      }
 
       return {
         title: item.fields.title,
         slug: item.fields.slug,
         excerpt: item.fields.excerpt,
         content: item.fields.content,
-        imageUrl: imageUrl,
-        imageTitle: imageTitle,
+        ...extractImageData(item.fields.coverImage),
         date: item.fields?.date,
-        author:
-          item.fields.author && 'fields' in item.fields.author
-            ? {
-                name: item.fields.author.fields.name,
-                bio: item.fields.author.fields.bio,
-                image:
-                  item.fields.author.fields.image &&
-                  'fields' in item.fields.author.fields.image
-                    ? ensureAbsoluteUrl(
-                        item.fields.author.fields.image.fields.file?.url
-                      )
-                    : undefined,
-              }
-            : undefined,
+        author: extractAuthorData(item.fields.author),
       };
-    } catch {
+    } catch (error) {
+      console.error('Error fetching post by slug:', error);
       return null;
     }
   },
@@ -173,49 +177,31 @@ export const contentfulQueries = {
    */
   getHeroPost: async () => {
     try {
-      const response = await contentfulClient.getEntries<TypePostSkeleton>({
-        content_type: 'post',
-        'fields.hero': true,
-        limit: 1,
-        include: 2,
-      });
+      const response =
+        await contentfulClient.withoutUnresolvableLinks.getEntries<TypePostSkeleton>(
+          {
+            content_type: 'post',
+            'fields.hero': true,
+            limit: 1,
+            include: 2,
+          }
+        );
 
       if (!response.items.length) return null;
 
       const item = response.items[0];
-
-      let imageUrl: string = '';
-      let imageTitle: string = '';
-
-      if (item.fields.coverImage && 'fields' in item.fields.coverImage) {
-        imageUrl = ensureAbsoluteUrl(item.fields.coverImage.fields.file?.url);
-        imageTitle = item.fields.coverImage.fields.title || '';
-      }
 
       return {
         title: item.fields.title,
         slug: item.fields.slug,
         excerpt: item.fields.excerpt,
         content: item.fields.content,
-        imageUrl: imageUrl,
-        imageTitle: imageTitle,
+        ...extractImageData(item.fields.coverImage),
         date: item.fields?.date,
-        author:
-          item.fields.author && 'fields' in item.fields.author
-            ? {
-                name: item.fields.author.fields.name,
-                bio: item.fields.author.fields.bio,
-                image:
-                  item.fields.author.fields.image &&
-                  'fields' in item.fields.author.fields.image
-                    ? ensureAbsoluteUrl(
-                        item.fields.author.fields.image.fields.file?.url
-                      )
-                    : undefined,
-              }
-            : undefined,
+        author: extractAuthorData(item.fields.author),
       };
-    } catch {
+    } catch (error) {
+      console.error('Error fetching hero post:', error);
       return null;
     }
   },
@@ -225,15 +211,23 @@ export const contentfulQueries = {
    * Orders by creation date
    */
   getCategories: async () => {
-    const response = await contentfulClient.getEntries<TypeCategorySkeleton>({
-      content_type: 'category',
-      order: ['sys.createdAt'],
-    });
+    try {
+      const response =
+        await contentfulClient.withoutUnresolvableLinks.getEntries<TypeCategorySkeleton>(
+          {
+            content_type: 'category',
+            order: ['sys.createdAt'],
+          }
+        );
 
-    return response.items.map((item) => ({
-      id: item.sys.id,
-      ...item.fields,
-    }));
+      return response.items.map((item) => ({
+        id: item.sys.id,
+        ...item.fields,
+      }));
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+      return [];
+    }
   },
 
   /**
@@ -242,48 +236,40 @@ export const contentfulQueries = {
    * @param categorySlug - URL slug of the category
    */
   getPostsByCategory: async (categorySlug: string) => {
-    const categoryResponse =
-      await contentfulClient.getEntries<TypeCategorySkeleton>({
-        content_type: 'category',
-        'fields.slug': categorySlug,
-        limit: 1,
-        include: 2,
-      });
+    try {
+      const categoryResponse =
+        await contentfulClient.getEntries<TypeCategorySkeleton>({
+          content_type: 'category',
+          'fields.slug': categorySlug,
+          limit: 1,
+          include: 2,
+        });
 
-    if (!categoryResponse.items.length) return [];
+      if (!categoryResponse.items.length) return [];
 
-    const response = await contentfulClient.getEntries<TypePostSkeleton>({
-      content_type: 'post',
-      links_to_entry: categoryResponse.items[0].sys.id,
-      order: ['-sys.createdAt'],
-      include: 2,
-    });
+      const response =
+        await contentfulClient.withoutUnresolvableLinks.getEntries<TypePostSkeleton>(
+          {
+            content_type: 'post',
+            links_to_entry: categoryResponse.items[0].sys.id,
+            order: ['-sys.createdAt'],
+            include: 2,
+          }
+        );
 
-    return response.items.map((item) => ({
-      title: item.fields.title,
-      slug: item.fields.slug,
-      excerpt: item.fields.excerpt,
-      content: item.fields.content,
-      image:
-        item.fields.coverImage && 'fields' in item.fields.coverImage
-          ? ensureAbsoluteUrl(item.fields.coverImage.fields.file?.url)
-          : undefined,
-      date: item.fields?.date,
-      author:
-        item.fields.author && 'fields' in item.fields.author
-          ? {
-              name: item.fields.author.fields.name,
-              bio: item.fields.author.fields.bio,
-              image:
-                item.fields.author.fields.image &&
-                'fields' in item.fields.author.fields.image
-                  ? ensureAbsoluteUrl(
-                      item.fields.author.fields.image.fields.file?.url
-                    )
-                  : undefined,
-            }
-          : undefined,
-    }));
+      return response.items.map((item) => ({
+        title: item.fields.title,
+        slug: item.fields.slug,
+        excerpt: item.fields.excerpt,
+        content: item.fields.content,
+        ...extractImageData(item.fields.coverImage),
+        date: item.fields?.date,
+        author: extractAuthorData(item.fields.author),
+      }));
+    } catch (error) {
+      console.error('Error fetching posts by category:', error);
+      return [];
+    }
   },
 
   /**
@@ -295,12 +281,14 @@ export const contentfulQueries = {
 
     try {
       const response =
-        await contentfulClient.getEntries<TypeMainNavigationSkeleton>({
-          content_type: 'mainNavigation',
-          'fields.title': 'Main menu',
-          limit: 1,
-          include: 2,
-        });
+        await contentfulClient.withoutUnresolvableLinks.getEntries<TypeMainNavigationSkeleton>(
+          {
+            content_type: 'mainNavigation',
+            'fields.title': 'Main menu',
+            limit: 1,
+            include: 2,
+          }
+        );
 
       if (!response.items.length || !response.items[0].fields.menuItems) {
         return defaultMenu;
@@ -310,7 +298,8 @@ export const contentfulQueries = {
         title: item && 'fields' in item ? (item.fields.title as string) : '',
         url: item && 'fields' in item ? (item.fields.url as string) : '#',
       }));
-    } catch {
+    } catch (error) {
+      console.error('Error fetching main navigation:', error);
       return defaultMenu;
     }
   },
@@ -320,26 +309,34 @@ export const contentfulQueries = {
    * Transforms rich text content to React components
    */
   getFooter: async () => {
-    const response = await contentfulClient.getEntries<TypeFooterSkeleton>({
-      content_type: 'footer',
-      limit: 1,
-    });
+    try {
+      const response =
+        await contentfulClient.withoutUnresolvableLinks.getEntries<TypeFooterSkeleton>(
+          {
+            content_type: 'footer',
+            limit: 1,
+          }
+        );
 
-    const defaultFooter = {
-      footerTitle: 'Korkkikierre',
-      footerContent: 'Tutkimme viinin maailmaa, yksi siemaus kerrallaan.',
-      footerCopyright: '© 2024 Korkkikierre. Kaikki oikeudet pidätetään.',
-    };
+      if (!response.items.length) throw new Error('No footer data found');
 
-    if (!response.items.length) return defaultFooter;
-
-    const footer = response.items[0].fields;
-    return {
-      footerTitle: footer.footerTitle ?? defaultFooter.footerTitle,
-      footerContent: footer.footerContent
-        ? documentToReactComponents(footer.footerContent)
-        : defaultFooter.footerContent,
-      footerCopyright: footer.footerCopyright ?? defaultFooter.footerCopyright,
-    };
+      const footer = response.items[0].fields;
+      return {
+        footerTitle: footer.footerTitle ?? 'Korkkikierre',
+        footerContent: footer.footerContent
+          ? documentToReactComponents(footer.footerContent)
+          : 'Tutkimme viinin maailmaa, yksi siemaus kerrallaan.',
+        footerCopyright:
+          footer.footerCopyright ??
+          '© 2024 Korkkikierre. Kaikki oikeudet pidätetään.',
+      };
+    } catch (error) {
+      console.warn('Using default footer due to error:', error);
+      return {
+        footerTitle: 'Korkkikierre',
+        footerContent: 'Tutkimme viinin maailmaa, yksi siemaus kerrallaan.',
+        footerCopyright: '© 2024 Korkkikierre. Kaikki oikeudet pidätetään.',
+      };
+    }
   },
 };

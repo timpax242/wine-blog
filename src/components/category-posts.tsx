@@ -28,8 +28,8 @@ export default async function CategoryPosts({
           <Link href={`/${post.slug}`}>
             <div className="relative h-64 w-full">
               <Image
-                src={post.image || '/placeholder.svg'}
-                alt={post.title}
+                src={post.imageUrl}
+                alt={post.imageTitle || post.title}
                 fill
                 className="object-cover"
               />

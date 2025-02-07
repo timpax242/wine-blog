@@ -6,14 +6,15 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 interface BlogPostProps {
   title: string;
   content: Document; // Using Contentful's Document type
+  excerpt?: string;
   imageUrl: string;
   imageTitle: string;
-  date: string | undefined;
-  excerpt: string | undefined;
+  date?: string;
   author?: {
     name: string;
-    bio: string | undefined;
-    image: string | undefined;
+    bio?: string;
+    imageUrl: string;
+    imageTitle: string;
   };
 }
 
@@ -78,8 +79,9 @@ export default function BlogPost({
           {author && author.name && (
             <AuthorProfile
               name={author.name}
-              bio={author.bio || ''}
-              image={author.image || '/placeholder.jpg'}
+              bio={author.bio}
+              imageUrl={author.imageUrl}
+              imageTitle={author.imageTitle}
             />
           )}
         </div>
