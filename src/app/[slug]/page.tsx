@@ -1,5 +1,6 @@
 import BlogPost from '@/components/blog-post';
 import { contentfulQueries } from '@/lib/contentful/queries';
+import Link from 'next/link';
 
 // Dynamic route handler for individual blog posts
 export default async function BlogPostPage({
@@ -12,7 +13,23 @@ export default async function BlogPostPage({
 
   // Handle 404 case
   if (!post) {
-    return <div>Artikkelia ei löytynyt</div>;
+    return (
+      <main className="flex-grow container mx-auto px-4 py-8">
+        <article className="max-w-4xl mx-auto">
+          <h1 className="text-2xl font-bold mb-4">Artikkelia ei löytynyt</h1>
+          <p className="text-gray-600">
+            Klikkaa tästä palataksesi palvelun{' '}
+            <Link
+              className="text-burgundy-700 hover:text-burgundy-900 font-semibold"
+              href="/"
+            >
+              etusivulle
+            </Link>
+            .
+          </p>
+        </article>
+      </main>
+    );
   }
 
   return <BlogPost {...post} />;
